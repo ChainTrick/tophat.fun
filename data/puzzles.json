@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "question": "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+    "answer": "An echo",
+    "difficulty": "Easy",
+    "category": "Riddle"
+  },
+  {
+    "id": 2,
+    "question": "A man is found dead in a field with a package next to him. There are no other footprints. How did he die?",
+    "answer": "His parachute failed to open. The 'package' is the unopened parachute.",
+    "difficulty": "Medium",
+    "category": "Lateral Thinking"
+  },
+  {
+    "id": 3,
+    "question": "What has keys but no locks, space but no room, and you can enter but can't go inside?",
+    "answer": "A keyboard",
+    "difficulty": "Easy",
+    "category": "Riddle"
+  },
+  {
+    "id": 4,
+    "question": "You have a 3-gallon jug and a 5-gallon jug. How do you measure exactly 4 gallons?",
+    "answer": "Fill the 5-gallon jug. Pour from it into the 3-gallon jug until full (leaving 2 gallons in the 5-gal). Empty the 3-gal. Pour the 2 gallons into the 3-gal. Fill the 5-gal again. Pour from it into the 3-gal (which has 2 gallons) until full — exactly 1 gallon transferred, leaving exactly 4 gallons in the 5-gal jug.",
+    "difficulty": "Hard",
+    "category": "Logic"
+  },
+  {
+    "id": 5,
+    "question": "What gets wetter the more it dries?",
+    "answer": "A towel",
+    "difficulty": "Easy",
+    "category": "Riddle"
+  },
+  {
+    "id": 6,
+    "question": "A farmer has 17 sheep. All but 9 die. How many sheep does the farmer have left?",
+    "answer": "9. 'All but 9' means 9 survived.",
+    "difficulty": "Medium",
+    "category": "Trick Question"
+  },
+  {
+    "id": 7,
+    "question": "If you rearrange the letters 'NEW DOCTOR', you get the name of an occupation. What is it?",
+    "answer": "ONE DOCTOR",
+    "difficulty": "Medium",
+    "category": "Word Puzzle"
+  },
+  {
+    "id": 8,
+    "question": "I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",
+    "answer": "Fire",
+    "difficulty": "Medium",
+    "category": "Riddle"
+  }
+]

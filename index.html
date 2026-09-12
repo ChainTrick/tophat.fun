@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopHat.fun — The Grand Cabinet of Curiosities</title>
+  <meta name="description" content="A magical collection of tricks, science, puzzles, and wonder. Daily facts powered by AI.">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Particle canvas background -->
+  <canvas id="particles"></canvas>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hat crown -->
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <!-- Hat band -->
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <!-- Brim -->
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <!-- Crown top highlight -->
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- Sparkle -->
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span class="logo-text">TopHat<span class="logo-dot">.fun</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#magic" data-section="magic">Magic</a></li>
+        <li><a href="#science" data-section="science">Science</a></li>
+        <li><a href="#facts" data-section="facts">Facts</a></li>
+        <li><a href="#puzzles" data-section="puzzles">Puzzles</a></li>
+        <li><a href="#history" data-section="history">History</a></li>
+        <li><a href="#illusions" data-section="illusions">Illusions</a></li>
+        <li><a href="#ai-corner" data-section="ai">AI Corner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✦ Welcome to the Cabinet ✦</div>
+      <h1 class="hero-title">
+        <span class="title-line">The Grand</span>
+        <span class="title-line accent">Cabinet of</span>
+        <span class="title-line">Curiosities</span>
+      </h1>
+      <p class="hero-subtitle">Where magic meets science, and wonder never ends.</p>
+      <div class="hero-actions">
+        <a href="#magic" class="btn btn-primary">Explore Magic ✦</a>
+        <a href="#facts" class="btn btn-ghost">Today's Fact →</a>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll to discover</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+    <div class="hero-decoration">
+      <div class="floating-card card-1">
+        <span class="card-icon">🎩</span>
+        <span class="card-text">Daily Fact</span>
+      </div>
+      <div class="floating-card card-2">
+        <span class="card-icon">⚗️</span>
+        <span class="card-text">Science Lab</span>
+      </div>
+      <div class="floating-card card-3">
+        <span class="card-icon">🧩</span>
+        <span class="card-text">Puzzle of the Day</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Magic Section -->
+  <section id="magic" class="section" data-section="magic">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter I</span>
+      <h2 class="section-title">Magic Tricks</h2>
+      <p class="section-desc">Learn the secrets behind the world's most mesmerizing illusions.</p>
+    </div>
+    <div class="section-content">
+      <div class="card-grid" id="magicGrid">
+        <!-- Populated by JS from data/tricks.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Science Section -->
+  <section id="science" class="section alt-bg" data-section="science">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter II</span>
+      <h2 class="section-title">Science Experiments</h2>
+      <p class="section-desc">Hands-on wonders you can try at home.</p>
+    </div>
+    <div class="section-content">
+      <div class="card-grid" id="scienceGrid">
+        <!-- Populated by JS from data/science.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Facts Section -->
+  <section id="facts" class="section" data-section="facts">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter III</span>
+      <h2 class="section-title">Fun Facts & Discoveries</h2>
+      <p class="section-desc">Mind-blowing facts updated daily by our AI agent.</p>
+    </div>
+    <div class="section-content">
+      <div class="daily-fact-card" id="dailyFactCard">
+        <div class="daily-fact-header">
+          <span class="daily-fact-badge">✦ Fact of the Day</span>
+          <span class="daily-fact-date" id="factDate"></span>
+        </div>
+        <h3 class="daily-fact-title" id="factTitle">Loading...</h3>
+        <p class="daily-fact-body" id="factBody">Our AI agent is fetching today's wonder...</p>
+        <div class="daily-fact-source" id="factSource"></div>
+      </div>
+      <div class="card-grid" id="factsGrid">
+        <!-- Populated by JS from data/facts.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Puzzles Section -->
+  <section id="puzzles" class="section alt-bg" data-section="puzzles">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter IV</span>
+      <h2 class="section-title">Puzzles & Riddles</h2>
+      <p class="section-desc">Test your wits against our collection of brain teasers.</p>
+    </div>
+    <div class="section-content">
+      <div class="puzzle-card" id="dailyPuzzle">
+        <span class="puzzle-badge">✦ Riddle of the Day</span>
+        <h3 class="puzzle-question" id="puzzleQuestion">Loading...</h3>
+        <button class="btn btn-ghost btn-sm reveal-answer" id="revealBtn">Show Answer</button>
+        <p class="puzzle-answer" id="puzzleAnswer" style="display:none;"></p>
+      </div>
+      <div class="card-grid" id="puzzlesGrid">
+        <!-- Populated by JS from data/puzzles.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section id="history" class="section" data-section="history">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter V</span>
+      <h2 class="section-title">History of Magic</h2>
+      <p class="section-desc">The fascinating stories behind the world's greatest magicians and their legendary tricks.</p>
+    </div>
+    <div class="section-content">
+      <div class="timeline" id="historyTimeline">
+        <!-- Populated by JS from data/history.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Illusion Plans Library Section -->
+  <section id="illusions" class="section" data-section="illusions">
+    <div class="section-header">
+      <span class="section-tag">✦ The Grand Archive</span>
+      <h2 class="section-title">Illusion Plans Library</h2>
+      <p class="section-desc">A curated collection of magic books, illusion blueprints, and secret manuscripts. Download and explore the art of illusion.</p>
+    </div>
+    <div class="section-content">
+      <div class="illusion-filter-bar" id="illusionFilterBar">
+        <button class="illusion-filter-btn active" data-filter="all">✦ All</button>
+        <button class="illusion-filter-btn" data-filter="Illusions">🎭 Illusions</button>
+        <button class="illusion-filter-btn" data-filter="Magic Secrets">🔮 Magic Secrets</button>
+        <button class="illusion-filter-btn" data-filter="Stage Illusions">🎪 Stage</button>
+        <button class="illusion-filter-btn" data-filter="Suspension">🪄 Suspension</button>
+        <button class="illusion-filter-btn" data-filter="Levitation">✨ Levitation</button>
+        <button class="illusion-filter-btn" data-filter="Rope Magic">🪢 Rope Magic</button>
+        <button class="illusion-filter-btn" data-filter="Tricks">🃏 Tricks</button>
+      </div>
+      <div class="illusion-search-bar">
+        <input type="text" class="illusion-search-input" id="illusionSearchInput" placeholder="Search titles, authors, or descriptions...">
+      </div>
+      <div class="card-grid" id="illusionsGrid">
+        <!-- Populated by JS from data/illusions.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Corner Section -->
+  <section id="ai-corner" class="section alt-bg" data-section="ai">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter VI</span>
+      <h2 class="section-title">AI Corner</h2>
+      <p class="section-desc">Where artificial intelligence meets artificial wonder.</p>
+    </div>
+    <div class="section-content">
+      <div class="ai-status-card">
+        <div class="ai-status-header">
+          <div class="ai-avatar">
+            <svg viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2" opacity="0.6"/>
+              <circle cx="20" cy="20" r="10" stroke="var(--accent)" stroke-width="1.5" opacity="0.4">
+                <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="20" cy="20" r="4" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <div class="ai-status-info">
+            <h4 class="ai-status-name">CurioBot</h4>
+            <p class="ai-status-desc">Your AI content curator</p>
+          </div>
+          <span class="ai-status-badge active">● Active</span>
+        </div>
+        <div class="ai-status-body">
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiFactsCount">0</span>
+            <span class="ai-metric-label">Facts Indexed</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiTricksCount">0</span>
+            <span class="ai-metric-label">Tricks Cataloged</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiLastUpdate">—</span>
+            <span class="ai-metric-label">Last Update</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiNextUpdate">—</span>
+            <span class="ai-metric-label">Next Update</span>
+          </div>
+        </div>
+        <div class="ai-log" id="aiLog">
+          <p class="ai-log-entry">✦ CurioBot initialized. Monitoring content feeds...</p>
+        </div>
+      </div>
+      <div class="ai-actions">
+        <button class="btn btn-primary" id="fetchFactsBtn">✦ Fetch New Facts</button>
+        <button class="btn btn-ghost" id="regeneratePuzzleBtn">🔄 New Puzzle</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span>TopHat<span class="logo-dot">.fun</span></span>
+      </div>
+      <p class="footer-tagline">Crafted with wonder ✦ Powered by curiosity</p>
+      <p class="footer-copy">&copy; 2025 tophat.fun — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // Inline illusion data for file:// protocol fallback
+    window.__illusionsData = [
+  {
+    "title": "Advanced Illusion Projects",
+    "author": "Tim Clothier",
+    "category": "Illusions",
+    "description": "A comprehensive guide to building advanced magic illusions and stage effects.",
+    "filename": "Advanced-illusion-projects-by-tim-clothier.pdf",
+    "size_mb": 9.4
+  },
+  {
+    "title": "The Famous Locked Book of Magic",
+    "author": "Unknown",
+    "category": "Magic Secrets",
+    "description": "Exclusive magical secrets from the legendary locked book of magic.",
+    "filename": "Exclusive Magical Secrets - The Famous Locked Book of Magic.pdf",
+    "size_mb": 9.8
+  },
+  {
+    "title": "Fifteen Great Illusions",
+    "author": "Abbott",
+    "category": "Illusions",
+    "description": "An Abbott publication featuring fifteen of the greatest stage illusions ever devised.",
+    "filename": "fifteen-great-illusions-an-abbott-publication.pdf",
+    "size_mb": 0.8
+  },
+  {
+    "title": "Great Tricks",
+    "author": "Unknown",
+    "category": "Tricks",
+    "description": "A collection of great tricks for illusionists and magicians.",
+    "filename": "Great-Tricks.pdf",
+    "size_mb": 18.6
+  },
+  {
+    "title": "Magical Rope Ties and Escapes",
+    "author": "LMT",
+    "category": "Rope Magic",
+    "description": "Master the art of rope ties and escapes with detailed instructions and techniques.",
+    "filename": "MagicalRopeTiesandEscapes.pdf",
+    "size_mb": 1.1
+  },
+  {
+    "title": "Magical Rope Ties and Escapes",
+    "author": "LMT (Alternate Edition)",
+    "category": "Rope Magic",
+    "description": "An alternate edition of the rope ties and escapes reference.",
+    "filename": "MagicalRopeTiesandescapes-LMT.pdf",
+    "size_mb": 1.1
+  },
+  {
+    "title": "Nite Club Illusions",
+    "author": "Unknown",
+    "category": "Stage Illusions",
+    "description": "Illusions designed for nightclub and cabaret performance settings.",
+    "filename": "nite-club-illusions.pdf",
+    "size_mb": 2.6
+  },
+  {
+    "title": "Easy to Build Illusions",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Paul Osborne's guide to building illusions that are easy to construct yet spectacular to perform.",
+    "filename": "paul-osborne-easy-to-build-illusions.pdf",
+    "size_mb": 12.1
+  },
+  {
+    "title": "Haunted Illusions",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Paul Osborne's massive collection of haunted house and spooky illusions — 7 volumes of ghostly effects!",
+    "filename": "paul-osborne-haunted-illusions-7.pdf",
+    "size_mb": 67.8
+  },
+  {
+    "title": "Illusion Systems Vol. 1",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "First volume of Paul Osborne's comprehensive system of illusion designs and mechanisms.",
+    "filename": "paul_osborne_illusion_systems_1.pdf",
+    "size_mb": 10.6
+  },
+  {
+    "title": "Illusion Systems Vol. 2",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Second volume continuing the comprehensive system of illusion designs and mechanisms.",
+    "filename": "paul_osborne_illusion_systems_2.pdf",
+    "size_mb": 19.4
+  },
+  {
+    "title": "Illusion Systems Vol. 3",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Third volume of Paul Osborne's legendary illusion systems collection.",
+    "filename": "Paul Osborne - Illusion Systems 3.pdf",
+    "size_mb": 20.6
+  },
+  {
+    "title": "Illusion Systems Vol. 4",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Fourth volume — the grand finale of Paul Osborne's illusion systems masterwork.",
+    "filename": "Paul Osborne - Illusion Systems 4.pdf",
+    "size_mb": 23.4
+  },
+  {
+    "title": "Grant's Aerial Suspension",
+    "author": "U.F. Grant",
+    "category": "Suspension",
+    "description": "U.F. Grant's techniques for aerial suspension illusions — making performers appear to float!",
+    "filename": "uf-grant-grant39s-aerial-suspension.pdf",
+    "size_mb": 0.1
+  },
+  {
+    "title": "Illusion Secrets",
+    "author": "U.F. Grant",
+    "category": "Magic Secrets",
+    "description": "U.F. Grant reveals the secrets behind classic stage illusions and their construction.",
+    "filename": "uf-grant-illusion-secrets.pdf",
+    "size_mb": 0.6
+  },
+  {
+    "title": "Modern Levitations",
+    "category": "Levitation",
+    "author": "U.F. Grant",
+    "description": "Modern approaches to levitation illusions and floating techniques.",
+    "filename": "uf-grant-modern-levitations.pdf",
+    "size_mb": 0.4
+  },
+  {
+    "title": "Victor Carton Illusions",
+    "author": "U.F. Grant",
+    "category": "Illusions",
+    "description": "U.F. Grant's collection of Victor Carton-inspired illusions and methods.",
+    "filename": "uf-grant-victory-carton-illusions.pdf",
+    "size_mb": 2.2
+  },
+  {
+    "title": "Secrets of Famous Illusionists",
+    "author": "Will Goldston",
+    "category": "Magic Secrets",
+    "description": "Will Goldston's compilation of secrets from the world's most famous illusionists.",
+    "filename": "will-goldston-secrets-of-famous-illusionists.pdf",
+    "size_mb": 2.4
+  },
+  {
+    "title": "Stage Illusions",
+    "author": "Will Goldston",
+    "category": "Stage Illusions",
+    "description": "A comprehensive guide to building and performing grand stage illusions.",
+    "filename": "will-goldston-stage-illusions.pdf",
+    "size_mb": 10.3
+  }
+];
+  </script>
+</body>
+</html>
