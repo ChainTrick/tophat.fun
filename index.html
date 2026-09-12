@@ -1066,7 +1066,7 @@
       filteredPlans.forEach(plan => {
         const item = document.createElement('a');
         item.className = 'plan-item fade-in';
-        item.href = `IllusionPlans/${plan.file}`;
+        item.href = plan.file;
         item.download = plan.file;
         item.innerHTML = `
           <span class="plan-icon">📄</span>
