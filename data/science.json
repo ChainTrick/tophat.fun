@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "Elephant Toothpaste",
+    "category": "Chemistry",
+    "difficulty": "Easy",
+    "description": "Create a massive foam eruption using hydrogen peroxide, yeast, and dish soap. The catalyst reaction releases oxygen rapidly, creating towering foam columns.",
+    "materials": ["3% hydrogen peroxide (200ml)", "Yeast (1 packet)", "Dish soap", "Food coloring", "Empty bottle"],
+    "timeNeeded": "10 min",
+    "safetyLevel": "Supervision required",
+    "tags": ["chemistry", "eruption", "exothermic"]
+  },
+  {
+    "id": 2,
+    "title": "Non-Newtonian Oobleck",
+    "category": "Physics",
+    "difficulty": "Easy",
+    "description": "Mix cornstarch and water to create a substance that's both solid and liquid. Punch it and it's hard — dip slowly and it flows like water.",
+    "materials": ["Cornstarch (2 cups)", "Water (1 cup)", "Large bowl"],
+    "timeNeeded": "15 min",
+    "safetyLevel": "Safe",
+    "tags": ["physics", "non-newtonian", "rheology"]
+  },
+  {
+    "id": 3,
+    "title": "Rain in a Jar",
+    "category": "Meteorology",
+    "difficulty": "Easy",
+    "description": "Simulate rainfall in a jar. Layer hot and cold water, then add shaving cream as clouds and food coloring that falls like raindrops.",
+    "materials": ["Tall jar or glass", "Shaving cream", "Food coloring", "Hot water", "Cold water"],
+    "timeNeeded": "15 min",
+    "safetyLevel": "Safe",
+    "tags": ["meteorology", "weather", "clouds"]
+  },
+  {
+    "id": 4,
+    "title": "Lava Lamp",
+    "category": "Chemistry",
+    "difficulty": "Easy",
+    "description": "Make a working lava lamp with oil, water, Alka-Seltzer, and food coloring. The gas bubbles carry colored water up and down in mesmerizing blobs.",
+    "materials": ["Clear bottle", "Vegetable oil", "Water", "Food coloring", "Alka-Seltzer tablets"],
+    "timeNeeded": "20 min",
+    "safetyLevel": "Safe",
+    "tags": ["chemistry", "density", "bubbles"]
+  },
+  {
+    "id": 5,
+    "title": "Static Electricity Butterfly",
+    "category": "Physics",
+    "difficulty": "Easy",
+    "description": "Create a paper butterfly that appears to fly using static electricity. A balloon or PVC pipe makes it dance in mid-air.",
+    "materials": ["Tissue paper", "Straw", "Thread", "Balloon or PVC pipe"],
+    "timeNeeded": "20 min",
+    "safetyLevel": "Safe",
+    "tags": ["physics", "static-electricity", "aerodynamics"]
+  },
+  {
+    "id": 6,
+    "title": "Crystal Garden",
+    "category": "Chemistry",
+    "difficulty": "Medium",
+    "description": "Grow colorful crystal formations over several days using silicate solutions and metal salts. Each salt creates a different colored 'plant'.",
+    "materials": ["Water glass (sodium silicate)", "Metal salts (iron, copper, cobalt)", "Water", "Glass container"],
+    "timeNeeded": "3-7 days",
+    "safetyLevel": "Supervision required",
+    "tags": ["chemistry", "crystals", "growth"]
+  }
+]

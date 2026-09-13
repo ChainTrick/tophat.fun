@@ -19,6 +19,14 @@ tophat.fun/
 │   ├── puzzles.json    # Puzzles & riddles
 │   ├── history.json    # History of Magic timeline
 │   └── illusions.json  # Illusion Plans Library metadata
+├── splats/               # Gaussian splat gallery (self-contained SuperSplat pages)
+│   ├── splat_van.html        # The Van — self-contained page, scene embedded as base64 (~25MB)
+│   ├── splat_building.html   # The Building — self-contained page (~21MB)
+│   ├── splat_construction.html # Construction Site — self-contained page (~26MB)
+│   ├── splat_gourd.html      # The Gourd — self-contained page (~8MB)
+│   ├── splat_aloe.html       # Aloe Vera — self-contained page (~11MB)
+│   ├── splat_haircut.html    # The Haircut — self-contained page (~10MB)
+│   └── splat_zombie.html     # Zombie — self-contained page (~5MB)
 └── IllusionPlans/      # PDF files for download
 ```
 
@@ -31,7 +39,8 @@ tophat.fun/
 5. **Puzzles & Riddles** — Daily riddle + collection
 6. **History of Magic** — Timeline from 200 BCE to present
 7. **Illusion Plans Library** — Browse and download 19 magic books and illusion blueprints
-8. **AI Corner** — CurioBot status dashboard with live logs
+8. **Splat Gallery** — Interactive gaussian splat scene (WebGPU), lazy-loaded on demand
+9. **AI Corner** — CurioBot status dashboard with live logs
 
 ## CurioBot AI Agent
 

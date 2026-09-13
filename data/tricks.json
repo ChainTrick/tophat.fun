@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "The Vanishing Coin",
+    "category": "Close-up",
+    "difficulty": "Beginner",
+    "description": "Make a coin disappear using the classic French Drop technique. Master the misdirection and timing — the secret is in the fingers, not the coin.",
+    "materials": ["Any coin", "Practice"],
+    "timeNeeded": "15 min",
+    "tags": ["close-up", "coin", "misdirection"]
+  },
+  {
+    "id": 2,
+    "title": "Ambitious Card",
+    "category": "Card Magic",
+    "difficulty": "Intermediate",
+    "description": "A card repeatedly rises above the deck on its own. This classic involves a simple false cut and a repeated gesture that fools the eye every time.",
+    "materials": ["Standard deck of cards"],
+    "timeNeeded": "30 min",
+    "tags": ["cards", "classic", "repeating"]
+  },
+  {
+    "id": 3,
+    "title": "The Invisible Deck",
+    "category": "Mentalism",
+    "difficulty": "Advanced",
+    "description": "Your spectator shuffles and selects a card, yet you always know exactly which one it is. The deck appears truly random — no forces, no switches.",
+    "materials": ["Standard deck of cards", "Notebook"],
+    "timeNeeded": "45 min",
+    "tags": ["mentalism", "cards", "apparent-impossibility"]
+  },
+  {
+    "id": 4,
+    "title": "Sponge to the Ear",
+    "category": "Classic",
+    "difficulty": "Beginner",
+    "description": "A classic stage prop trick — a sponge ball travels from hand to hand, then appears behind the ear. Simple gimmick, huge laughs.",
+    "materials": ["Set of sponge balls (3 sizes)", "Stage or table"],
+    "timeNeeded": "20 min",
+    "tags": ["stage", "sponge-balls", "classic"]
+  },
+  {
+    "id": 5,
+    "title": "Cups and Balls",
+    "category": "Classic",
+    "difficulty": "Intermediate",
+    "description": "The oldest magic trick in history. Balls appear under cups, vanish, and travel between them. Master this and you've mastered the foundation of all magic.",
+    "materials": ["Cups and balls set", "Table with cloth"],
+    "timeNeeded": "1 hour",
+    "tags": ["stage", "classic", "props"]
+  },
+  {
+    "id": 6,
+    "title": "Card to Pocket",
+    "category": "Street Magic",
+    "difficulty": "Intermediate",
+    "description": "A freely chosen card literally walks across the table and jumps into your spectator's pocket. No sleight of hand required.",
+    "materials": ["Standard deck of cards", "Handkerchief (optional)"],
+    "timeNeeded": "30 min",
+    "tags": ["street", "cards", "impossible"]
+  }
+]
