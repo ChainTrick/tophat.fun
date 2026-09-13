@@ -19,15 +19,29 @@ tophat.fun/
 │   ├── puzzles.json    # Puzzles & riddles
 │   ├── history.json    # History of Magic timeline
 │   └── illusions.json  # Illusion Plans Library metadata
-├── splats/               # Gaussian splat gallery (self-contained SuperSplat pages)
-│   ├── splat_van.html        # The Van — self-contained page, scene embedded as base64 (~25MB)
-│   ├── splat_building.html   # The Building — self-contained page (~21MB)
-│   ├── splat_construction.html # Construction Site — self-contained page (~26MB)
-│   ├── splat_gourd.html      # The Gourd — self-contained page (~8MB)
-│   ├── splat_aloe.html       # Aloe Vera — self-contained page (~11MB)
-│   ├── splat_haircut.html    # The Haircut — self-contained page (~10MB)
-│   └── splat_zombie.html     # Zombie — self-contained page (~5MB)
-└── IllusionPlans/      # PDF files for download
+├── *.pdf               # Illusion Plans — 17 PDFs, AT THE PAGE ROOT
+└── splat_*.html        # Gaussian splat gallery — 7 pages, AT THE PAGE ROOT
+```
+
+### Asset paths are root-relative (important)
+
+The published site has **no** `IllusionPlans/` or `splats/` directories: the PDFs and
+the splat pages sit next to `index.html`, and `js/main.js` links to them by bare
+filename (`encodeURIComponent(item.filename)` and `scene + '.html'`). PDF filenames
+contain spaces and `Great-Tricks.pdf` contains uppercase, so they must be referenced
+with `encodeURIComponent`, never hard-coded.
+
+Any deploy that mirrors this repo must therefore upload the PDFs and `splat_*.html`
+files to the web root. Moving them into subdirectories — or uploading them to a
+different branch than the one Pages serves — breaks every download and every splat
+with a 404. Verify after deploying:
+
+```sh
+curl -o /dev/null -w '%{http_code}\n' https://SITE/Advanced-illusion-projects-by-tim-clothier.pdf
+curl -o /dev/null -w '%{http_code}\n' https://SITE/splat_van.html
+```
+
+Both must return `200`.
 ```
 
 ## Sections
@@ -39,7 +53,7 @@ tophat.fun/
 5. **Puzzles & Riddles** — Daily riddle + collection
 6. **History of Magic** — Timeline from 200 BCE to present
 7. **Illusion Plans Library** — Browse and download 19 magic books and illusion blueprints
-8. **Splat Gallery** — Interactive gaussian splat scene (WebGPU), lazy-loaded on demand
+8. **Splat Gallery** — Interactive gaussian splat scenes (WebGPU), lazy-loaded on demand
 9. **AI Corner** — CurioBot status dashboard with live logs
 
 ## CurioBot AI Agent

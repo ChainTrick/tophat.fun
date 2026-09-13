@@ -3,10 +3,16 @@
    ═══════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadContent();
+  // Run scroll-reveal AFTER the cards are injected. initScrollReveal()
+  // registers .reveal elements with an IntersectionObserver, and the JSON-driven
+  // cards do not exist yet at this point — anything created later never gets
+  // observed, so it stays at opacity:0 forever (invisible titles and buttons).
+  loadContent().then(initScrollReveal).catch(err => {
+    console.warn('Content load failed:', err);
+    initScrollReveal();
+  });
   initParticles();
   initNav();
-  initScrollReveal();
   initBackToTop();
 });
 
@@ -226,6 +232,9 @@ function renderIllusions(container, data) {
     card.style.animationDelay = `${i * 0.1}s`;
   });
 
+  // Re-rendering replaces the card elements, so register the new ones
+  initScrollReveal();
+
   // Real <a download> links do the work; this only reports progress.
   // Never preventDefault here — a plain same-origin link streams the file
   // and shows the browser's own download UI, instead of buffering up to
@@ -424,19 +433,65 @@ function initNav() {
   });
 }
 
-/* ── Scroll Reveal ── */
+/* ── Scroll Reveal ──
+   CSS keeps .reveal visible by default; JS opts elements into the hidden state by
+   adding .reveal-pending, then removes it when they scroll into view. If anything
+   here fails, elements simply stay visible instead of vanishing. */
+let revealObserver = null;
+
 function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  if (!('IntersectionObserver' in window)) return; // leave everything visible
+
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('reveal-pending');
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+  }
+
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    // Hide, then reveal on intersection. Elements already on screen are revealed
+    // immediately so nothing above the fold ever flickers or stays hidden.
+    el.classList.add('reveal-pending');
+    revealObserver.observe(el);
+  });
+
+  // Safety net 1: if the observer hasn't fired for something already on screen, show it.
+  clearTimeout(initScrollReveal._t);
+  initScrollReveal._t = setTimeout(() => {
+    document.querySelectorAll('.reveal.reveal-pending').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        el.classList.remove('reveal-pending');
+        el.classList.add('visible');
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, 1000);
 
-  reveals.forEach(el => observer.observe(el));
+  // Safety net 2: a plain scroll sweep that needs no observer at all. If
+  // IntersectionObserver is unreliable, scrolling still reveals content — and if
+  // this somehow misses too, the element stays visible rather than hidden.
+  if (!initScrollReveal._bound) {
+    initScrollReveal._bound = true;
+    const sweep = () => {
+      document.querySelectorAll('.reveal.reveal-pending').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight + 80 && r.bottom > -80) {
+          el.classList.remove('reveal-pending');
+          el.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', sweep, { passive: true });
+    window.addEventListener('resize', sweep, { passive: true });
+    initScrollReveal._sweep = sweep;
+  }
+  if (initScrollReveal._sweep) initScrollReveal._sweep();
 }
 
 /* ── Back to Top ── */

@@ -820,15 +820,19 @@ body {
 }
 
 /* ── Scroll Reveal ── */
+/* ── Scroll Reveal ──
+   Content is VISIBLE BY DEFAULT. The hidden state is applied by JavaScript only
+   (via .reveal-pending), so if the observer never fires — or JS never runs —
+   the failure mode is "no animation", never "invisible content". */
 .reveal {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal.reveal-pending {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 /* ── Responsive ── */
