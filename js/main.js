@@ -135,55 +135,48 @@ async function loadHistory() {
 let currentIllusionFilter = 'all';
 let currentIllusionSearch = '';
 
+// The PDFs live next to index.html in the repo root — there is no
+// IllusionPlans/ subfolder on the published site. Filenames contain
+// spaces, so they must be percent-encoded before they go in a URL.
+function illusionUrl(filename) {
+  return encodeURIComponent(filename);
+}
+
+let illusionsData = null;
+
+async function getIllusions() {
+  if (illusionsData) return illusionsData;
+  try {
+    const response = await fetch('data/illusions.json');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    illusionsData = await response.json();
+  } catch (fetchErr) {
+    // Fallback for file:// protocol — index.html exposes the same array inline.
+    console.warn('fetch of data/illusions.json failed, using inline fallback:', fetchErr.message);
+    if (Array.isArray(window.__illusionsData) && window.__illusionsData.length) {
+      illusionsData = window.__illusionsData;
+    } else {
+      throw fetchErr;
+    }
+  }
+  return illusionsData;
+}
+
 async function loadIllusions() {
   const container = document.getElementById('illusionsGrid');
   if (!container) return;
 
   try {
-    let data;
-    // Try fetch first (works on HTTP servers)
-    try {
-      const response = await fetch('data/illusions.json');
-      data = await response.json();
-    } catch (fetchErr) {
-      // Fallback for file:// protocol — parse from HTML comment
-      console.warn('fetch failed, using fallback:', fetchErr.message);
-      data = loadIllusionsFromFallback();
-    }
-    renderIllusions(container, data);
+    renderIllusions(container, await getIllusions());
     initIllusionFilters();
     initIllusionSearch();
   } catch (err) {
     console.warn('Failed to load illusions:', err);
-    container.innerHTML = `<p class="card-desc" style="text-align:center; padding:2rem;">
+    container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem;">
       <p style="font-size:2rem; margin-bottom:0.5rem;">⚠️</p>
       <p>Content not available. Make sure the site is served via HTTP (not file://).</p>
-      <p style="margin-top:1rem; font-size:0.8rem; color:var(--accent-light);">
-        Run: <code style="background:rgba(255,255,255,0.05); padding:0.2rem 0.5rem; border-radius:4px;">python3 -m http.server 8080</code><br>
-        Then open: <a href="http://localhost:8080" style="color:var(--accent-light);">http://localhost:8080</a>
-      </p>
-    </p>`;
+    </div>`;
   }
-}
-
-function loadIllusionsFromFallback() {
-  // Parse the inline illusion data script directly from the DOM
-  // This works even when the inline script hasn't executed yet
-  const scripts = document.querySelectorAll('script');
-  for (const script of scripts) {
-    if (script.textContent && script.textContent.includes('window.__illusionsData')) {
-      try {
-        // Extract the JSON array from the inline script
-        const match = script.textContent.match(/window\.__illusionsData\s*=\s*(\[.*?\]);\s*<\/script>/s);
-        if (match) {
-          return JSON.parse(match[1]);
-        }
-      } catch (e) {
-        console.warn('Failed to parse inline illusions data:', e);
-      }
-    }
-  }
-  return [];
 }
 
 function renderIllusions(container, data) {
@@ -221,7 +214,8 @@ function renderIllusions(container, data) {
       <p class="card-desc">${item.description}</p>
       <div class="card-footer">
         <span class="file-size">📄 ${item.size_mb} MB</span>
-        <a class="download-btn" data-path="IllusionPlans/${item.filename}" data-filename="${item.filename}">
+        <a class="download-btn" href="${illusionUrl(item.filename)}"
+           download="${item.filename}" data-filename="${item.filename}">
           <span>⬇</span> Download
         </a>
       </div>
@@ -232,88 +226,46 @@ function renderIllusions(container, data) {
     card.style.animationDelay = `${i * 0.1}s`;
   });
 
-  // Attach download handlers to all download buttons
+  // Real <a download> links do the work; this only reports progress.
+  // Never preventDefault here — a plain same-origin link streams the file
+  // and shows the browser's own download UI, instead of buffering up to
+  // 24MB into memory via fetch+blob.
   container.querySelectorAll('.download-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const path = btn.dataset.path;
-      const filename = btn.dataset.filename;
-      downloadFile(path, filename);
+    btn.addEventListener('click', () => {
+      showToast(`⬇ Downloading ${btn.dataset.filename}`);
     });
   });
 }
 
-async function downloadFile(path, filename) {
-  // Show toast
+/* ── Download toast ── */
+function showToast(message) {
+  document.querySelectorAll('.download-toast').forEach(t => t.remove());
   const toast = document.createElement('div');
   toast.className = 'download-toast';
-  toast.textContent = '⬇ Preparing download...';
+  toast.textContent = message;
   document.body.appendChild(toast);
-  setTimeout(() => toast.classList.add('show'), 10);
+  requestAnimationFrame(() => toast.classList.add('show'));
   setTimeout(() => toast.classList.remove('show'), 3000);
   setTimeout(() => toast.remove(), 3500);
-
-  try {
-    // Try fetch-based download first (works on HTTP servers)
-    const response = await fetch(path);
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-    // Update toast
-    const toastEl = document.querySelector('.download-toast');
-    if (toastEl) {
-      toastEl.textContent = '✓ Download started!';
-      toastEl.classList.add('show');
-      setTimeout(() => toastEl.classList.remove('show'), 3000);
-      setTimeout(() => toastEl.remove(), 3500);
-    }
-  } catch (err) {
-    console.warn('Fetch download failed, trying direct link:', err);
-    // Fallback: open in new tab (user can manually save)
-    window.open(path, '_blank');
-    const toastEl = document.querySelector('.download-toast');
-    if (toastEl) {
-      toastEl.textContent = '⚠ Opened in new tab — press Ctrl+S to save';
-      toastEl.classList.add('show');
-      setTimeout(() => toastEl.classList.remove('show'), 4000);
-      setTimeout(() => toastEl.remove(), 4500);
-    }
-  }
 }
 
 function initIllusionFilters() {
   const bar = document.getElementById('illusionFilterBar');
   if (!bar) return;
+  if (bar.dataset.bound) return; // loadIllusions() can run more than once
+  bar.dataset.bound = '1';
 
   bar.querySelectorAll('.illusion-filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       bar.querySelectorAll('.illusion-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentIllusionFilter = btn.dataset.filter;
       const container = document.getElementById('illusionsGrid');
-      if (container) {
-        // Use inline data or fetch (for HTTP servers)
-        let data;
-        try {
-          data = loadIllusionsFromFallback();
-        } catch (e) {
-          fetch('data/illusions.json')
-            .then(r => r.json())
-            .then(d => { window.__cachedIllusionsData = d; renderIllusions(container, d); });
-          return;
-        }
-        if (data.length > 0) {
-          window.__cachedIllusionsData = data;
-          renderIllusions(container, data);
-        }
+      if (!container) return;
+      try {
+        renderIllusions(container, await getIllusions());
+      } catch (err) {
+        console.warn('Failed to filter illusions:', err);
       }
     });
   });
@@ -322,25 +274,17 @@ function initIllusionFilters() {
 function initIllusionSearch() {
   const input = document.getElementById('illusionSearchInput');
   if (!input) return;
+  if (input.dataset.bound) return;
+  input.dataset.bound = '1';
 
-  input.addEventListener('input', (e) => {
+  input.addEventListener('input', async (e) => {
     currentIllusionSearch = e.target.value;
     const container = document.getElementById('illusionsGrid');
-    if (container) {
-      // Use cached inline data or fetch (for HTTP servers)
-      let data = window.__cachedIllusionsData;
-      if (!data) {
-        try {
-          data = loadIllusionsFromFallback();
-        } catch (err) {
-          console.warn('Failed to load illusions data for search:', err);
-          return;
-        }
-      }
-      if (data) {
-        window.__cachedIllusionsData = data;
-        renderIllusions(container, data);
-      }
+    if (!container) return;
+    try {
+      renderIllusions(container, await getIllusions());
+    } catch (err) {
+      console.warn('Failed to search illusions:', err);
     }
   });
 }
@@ -546,6 +490,11 @@ document.getElementById('regeneratePuzzleBtn')?.addEventListener('click', async 
   let currentScene = 'splat_van';
   let loading = false;
 
+  // Scene pages sit in the repo root too — there is no splats/ folder live.
+  function sceneUrl(scene) {
+    return `${scene}.html`;
+  }
+
   function loadViewer() {
     if (loading) return;
     loading = true;
@@ -554,7 +503,7 @@ document.getElementById('regeneratePuzzleBtn')?.addEventListener('click', async 
       loadBtn.disabled = true;
     }
     const iframe = document.createElement('iframe');
-    iframe.src = `splats/${currentScene}.html`;
+    iframe.src = sceneUrl(currentScene);
     iframe.title = `Gaussian splat viewer — ${titleEl ? titleEl.textContent : currentScene}`;
     iframe.allowFullscreen = true;
     // WebGPU needs GPU access in the embedded frame
@@ -570,11 +519,11 @@ document.getElementById('regeneratePuzzleBtn')?.addEventListener('click', async 
     currentScene = scene;
     if (titleEl) titleEl.textContent = btn.dataset.title || scene;
     if (descEl) descEl.textContent = btn.dataset.desc || '';
-    if (newTabLink) newTabLink.href = `splats/${scene}.html`;
+    if (newTabLink) newTabLink.href = sceneUrl(scene);
     // If a viewer is already embedded, point it at the newly selected scene (it reloads itself)
     const existing = stage.querySelector('iframe');
     if (existing) {
-      existing.src = `splats/${scene}.html`;
+      existing.src = sceneUrl(scene);
       return;
     }
   }
