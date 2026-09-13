@@ -8,11 +8,131 @@
     "size_mb": 9.4
   },
   {
-    "title": "Fifteen Great Illusions",
-    "author": "Abbott",
+    "title": "Easy to Build Illusions",
+    "author": "Paul Osborne",
     "category": "Illusions",
+    "description": "Entry-level illusion construction -- big stage effects from inexpensive, everyday materials.",
+    "filename": "paul-osborne-easy-to-build-illusions.pdf",
+    "size_mb": 12.1
+  },
+  {
+    "title": "Illusion Secrets",
+    "author": "U.F. Grant",
+    "category": "Illusions",
+    "description": "A short Grant manuscript of closely guarded illusion methods.",
+    "filename": "uf-grant-illusion-secrets.pdf",
+    "size_mb": 0.6
+  },
+  {
+    "title": "Illusion Systems, Vol. 1",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "The first volume of the Illusion Systems series, with plans and dimensions for classic stage pieces.",
+    "filename": "paul_osborne_illusion_systems_1.pdf",
+    "size_mb": 10.6
+  },
+  {
+    "title": "Illusion Systems, Vol. 2",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Volume two of the Illusion Systems series -- more blueprints for the working illusion builder.",
+    "filename": "paul_osborne_illusion_systems_2.pdf",
+    "size_mb": 19.4
+  },
+  {
+    "title": "Illusion Systems, Vol. 3",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Volume three of the Illusion Systems series -- buildable stage illusions with full construction plans.",
+    "filename": "Paul Osborne - Illusion Systems 3.pdf",
+    "size_mb": 20.6
+  },
+  {
+    "title": "Illusion Systems, Vol. 4",
+    "author": "Paul Osborne",
+    "category": "Illusions",
+    "description": "Volume four of the Illusion Systems series -- further stage illusions with complete working drawings.",
+    "filename": "Paul Osborne - Illusion Systems 4.pdf",
+    "size_mb": 23.4
+  },
+  {
+    "title": "Victory Carton Illusions",
+    "author": "U.F. Grant",
+    "category": "Illusions",
+    "description": "Illusions built from wartime victory cartons -- inventive effects from a scrap-material era.",
+    "filename": "uf-grant-victory-carton-illusions.pdf",
+    "size_mb": 2.2
+  },
+  {
+    "title": "Fifteen Great Illusions",
+    "author": "Abbott's Magic",
+    "category": "Stage Illusions",
     "description": "An Abbott publication featuring fifteen of the greatest stage illusions ever devised.",
     "filename": "fifteen-great-illusions-an-abbott-publication.pdf",
     "size_mb": 0.8
+  },
+  {
+    "title": "Nite Club Illusions",
+    "author": "U.F. Grant",
+    "category": "Stage Illusions",
+    "description": "Cabaret-scale illusions from the 1930s: the Chinese Chopper, Cutting a Woman in Half, the Sword Box and more.",
+    "filename": "nite-club-illusions.pdf",
+    "size_mb": 2.6
+  },
+  {
+    "title": "Stage Illusions",
+    "author": "Will Goldston",
+    "category": "Stage Illusions",
+    "description": "Goldston's survey of large-scale stage illusion, with construction notes and presentation.",
+    "filename": "will-goldston-stage-illusions.pdf",
+    "size_mb": 10.3
+  },
+  {
+    "title": "Exclusive Magical Secrets",
+    "author": "Will Goldston",
+    "category": "Magic Secrets",
+    "description": "The 1912 'locked book' -- bound with a padlock so it could not be browsed in a shop. Contributions from Houdini, Chung Ling Soo and Le Roy.",
+    "filename": "Exclusive Magical Secrets - The Famous Locked Book of Magic.pdf",
+    "size_mb": 9.8
+  },
+  {
+    "title": "Secrets of Famous Illusionists",
+    "author": "Will Goldston",
+    "category": "Magic Secrets",
+    "description": "Goldston lifts the curtain on the methods behind the era's best-known stage marvels.",
+    "filename": "will-goldston-secrets-of-famous-illusionists.pdf",
+    "size_mb": 2.4
+  },
+  {
+    "title": "Grant's Aerial Suspension",
+    "author": "U.F. Grant",
+    "category": "Suspension",
+    "description": "The classic aerial suspension worked out in detail -- the float that hangs a performer in mid-air.",
+    "filename": "uf-grant-grant39s-aerial-suspension.pdf",
+    "size_mb": 0.1
+  },
+  {
+    "title": "Modern Levitations",
+    "author": "U.F. Grant",
+    "category": "Levitation",
+    "description": "Modern methods for making a body rise -- levitation effects for stage and parlour.",
+    "filename": "uf-grant-modern-levitations.pdf",
+    "size_mb": 0.4
+  },
+  {
+    "title": "Magical Rope Ties and Escapes",
+    "author": "Harry Houdini",
+    "category": "Rope Magic",
+    "description": "Houdini's 1921 rope manual: 36 releases, ties and escapes including the Kellar Tie and the Under-Water Escape.",
+    "filename": "MagicalRopeTiesandEscapes.pdf",
+    "size_mb": 1.1
+  },
+  {
+    "title": "Great Tricks Revealed",
+    "author": "Will Goldston",
+    "category": "Tricks",
+    "description": "Pocket tricks, billiard balls, rope routines, card work and stage illusions, with an introduction by Horace Goldin.",
+    "filename": "Great-Tricks.pdf",
+    "size_mb": 18.6
   }
 ]
