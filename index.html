@@ -3,1283 +3,331 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TopHat.fun ✨ Magic | Science | Wonder</title>
+  <title>TopHat.fun — The Grand Cabinet of Curiosities</title>
+  <meta name="description" content="A magical collection of tricks, science, puzzles, and wonder. Daily facts powered by AI.">
+  <meta name="theme-color" content="#0a0a1a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: rgba(255, 255, 255, 0.03);
-      --bg-card-hover: rgba(255, 255, 255, 0.06);
-      --text-primary: #f0f0f5;
-      --text-secondary: #8888a0;
-      --text-muted: #55556a;
-      --accent-purple: #8b5cf6;
-      --accent-blue: #3b82f6;
-      --accent-cyan: #06b6d4;
-      --accent-pink: #ec4899;
-      --accent-gold: #f59e0b;
-      --accent-green: #10b981;
-      --gradient-magic: linear-gradient(135deg, #8b5cf6, #3b82f6, #06b6d4);
-      --gradient-warm: linear-gradient(135deg, #ec4899, #f59e0b);
-      --gradient-cool: linear-gradient(135deg, #3b82f6, #06b6d4);
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --glow-purple: 0 0 30px rgba(139, 92, 246, 0.3);
-      --glow-blue: 0 0 30px rgba(59, 130, 246, 0.3);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* ===== SPARKLE CANVAS ===== */
-    #sparkle-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* ===== NAVIGATION ===== */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(20px);
-      background: rgba(10, 10, 15, 0.7);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: all 0.3s ease;
-    }
-
-    nav.scrolled {
-      padding: 0.6rem 2rem;
-      background: rgba(10, 10, 15, 0.9);
-    }
-
-    .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: var(--gradient-magic);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-logo .hat {
-      font-size: 1.8rem;
-      -webkit-text-fill-color: initial;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient-magic);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ===== HERO SECTION ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      padding: 2rem;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .hero-bg .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.4;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .hero-bg .orb-1 {
-      width: 400px; height: 400px;
-      background: var(--accent-purple);
-      top: 10%; left: 15%;
-      animation-delay: 0s;
-    }
-
-    .hero-bg .orb-2 {
-      width: 300px; height: 300px;
-      background: var(--accent-blue);
-      top: 40%; right: 10%;
-      animation-delay: -3s;
-    }
-
-    .hero-bg .orb-3 {
-      width: 250px; height: 250px;
-      background: var(--accent-cyan);
-      bottom: 10%; left: 30%;
-      animation-delay: -5s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.05); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-emoji {
-      font-size: 5rem;
-      margin-bottom: 1.5rem;
-      animation: bounce 2s ease-in-out infinite;
-      display: inline-block;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 .gradient-text {
-      background: var(--gradient-magic);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.8rem 2rem;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .btn-primary {
-      background: var(--gradient-magic);
-      color: white;
-      box-shadow: var(--glow-purple);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
-    }
-
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-primary);
-      border: 1px solid var(--border-subtle);
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--accent-purple);
-      transform: translateY(-2px);
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      animation: bob 2s ease-in-out infinite;
-    }
-
-    .scroll-indicator span {
-      display: block;
-      width: 24px;
-      height: 40px;
-      border: 2px solid var(--text-muted);
-      border-radius: 12px;
-      position: relative;
-    }
-
-    .scroll-indicator span::after {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 8px;
-      background: var(--accent-purple);
-      border-radius: 2px;
-      animation: scroll-dot 2s ease-in-out infinite;
-    }
-
-    @keyframes bob {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-
-    @keyframes scroll-dot {
-      0% { opacity: 1; top: 6px; }
-      100% { opacity: 0; top: 20px; }
-    }
-
-    /* ===== SECTIONS ===== */
-    section {
-      padding: 6rem 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .section-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent-purple);
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* ===== MAGIC TRICKS SECTION ===== */
-    #magic {
-      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(139, 92, 246, 0.03) 50%, var(--bg-primary) 100%);
-    }
-
-    .tricks-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .trick-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .trick-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-magic);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .trick-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-purple);
-      box-shadow: var(--glow-purple);
-    }
-
-    .trick-card:hover::before {
-      opacity: 0.05;
-    }
-
-    .trick-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .trick-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .trick-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .trick-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .trick-tag {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      margin-top: 1rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .tag-easy {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-
-    .tag-medium {
-      background: rgba(245, 158, 11, 0.1);
-      color: var(--accent-gold);
-      border: 1px solid rgba(245, 158, 11, 0.2);
-    }
-
-    .tag-hard {
-      background: rgba(236, 72, 153, 0.1);
-      color: var(--accent-pink);
-      border: 1px solid rgba(236, 72, 153, 0.2);
-    }
-
-    /* ===== SCIENCE SECTION ===== */
-    #science {
-      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(59, 130, 246, 0.03) 50%, var(--bg-primary) 100%);
-    }
-
-    .science-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .science-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .science-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-cool);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .science-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-blue);
-      box-shadow: var(--glow-blue);
-    }
-
-    .science-card:hover::before {
-      opacity: 0.05;
-    }
-
-    .science-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .science-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .science-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .science-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    /* ===== RANDOM FUN SECTION ===== */
-    #fun {
-      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(236, 72, 153, 0.03) 50%, var(--bg-primary) 100%);
-    }
-
-    .fun-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .fun-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .fun-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-warm);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .fun-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-pink);
-      box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
-    }
-
-    .fun-card:hover::before {
-      opacity: 0.05;
-    }
-
-    .fun-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .fun-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .fun-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .fun-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    /* ===== ILLUSION PLANS SECTION ===== */
-    #plans {
-      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(245, 158, 11, 0.03) 50%, var(--bg-primary) 100%);
-    }
-
-    .plans-search {
-      max-width: 500px;
-      margin: 0 auto 3rem;
-      position: relative;
-    }
-
-    .plans-search input {
-      width: 100%;
-      padding: 1rem 1.5rem 1rem 3rem;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-card);
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: 'DM Sans', sans-serif;
-      outline: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .plans-search input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .plans-search input:focus {
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
-    }
-
-    .plans-search .search-icon {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 1.1rem;
-    }
-
-    .plans-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1rem;
-    }
-
-    .plan-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .plan-item:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--accent-gold);
-      transform: translateX(4px);
-    }
-
-    .plan-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-    }
-
-    .plan-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .plan-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .plan-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .plan-download {
-      font-size: 1.2rem;
-      color: var(--accent-gold);
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .plan-item:hover .plan-download {
-      transform: translateX(4px);
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      padding: 3rem 2rem;
-      text-align: center;
-      border-top: 1px solid var(--border-subtle);
-      position: relative;
-      z-index: 2;
-    }
-
-    footer p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    footer .heart {
-      color: var(--accent-pink);
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(10, 10, 15, 0.95);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 1.5rem 2rem;
-        gap: 1rem;
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-toggle {
-        display: block;
-      }
-
-      .hero-emoji {
-        font-size: 3.5rem;
-      }
-
-      .plans-list {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 4rem 1.5rem;
-      }
-    }
-
-    /* ===== ANIMATIONS ===== */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ===== MAGIC CURSOR TRAIL ===== */
-    .cursor-sparkle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      font-size: 1rem;
-      animation: sparkle-fade 0.8s ease-out forwards;
-    }
-
-    @keyframes sparkle-fade {
-      0% { opacity: 1; transform: translate(0, 0) scale(1); }
-      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
-    }
-
-    /* ===== INTERACTIVE TOGGLE ===== */
-    .trick-reveal {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-subtle);
-      display: none;
-    }
-
-    .trick-reveal.show {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .trick-reveal p {
-      color: var(--accent-purple);
-      font-size: 0.9rem;
-      font-style: italic;
-    }
-
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-primary);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--text-muted);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--text-secondary);
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- Sparkle Canvas -->
-  <canvas id="sparkle-canvas"></canvas>
+  <!-- Particle canvas background -->
+  <canvas id="particles"></canvas>
 
   <!-- Navigation -->
-  <nav id="navbar">
-    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <span class="hat">🎩</span> TopHat.fun
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hat crown -->
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <!-- Hat band -->
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <!-- Brim -->
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <!-- Crown top highlight -->
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- Sparkle -->
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span class="logo-text">TopHat<span class="logo-dot">.fun</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#magic" data-section="magic">Magic</a></li>
+        <li><a href="#science" data-section="science">Science</a></li>
+        <li><a href="#facts" data-section="facts">Facts</a></li>
+        <li><a href="#puzzles" data-section="puzzles">Puzzles</a></li>
+        <li><a href="#history" data-section="history">History</a></li>
+        <li><a href="#illusions" data-section="illusions">Illusions</a></li>
+        <li><a href="#splats" data-section="splats">Splat Gallery</a></li>
+        <li><a href="#ai-corner" data-section="ai">AI Corner</a></li>
+      </ul>
     </div>
-    <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu">☰</button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#magic">Magic</a></li>
-      <li><a href="#science">Science</a></li>
-      <li><a href="#fun">Fun Stuff</a></li>
-      <li><a href="#plans">Illusion Plans</a></li>
-    </ul>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-    </div>
+  <section id="hero" class="hero">
     <div class="hero-content">
-      <span class="hero-emoji">🎩✨</span>
-      <h1>
-        Welcome to<br>
-        <span class="gradient-text">TopHat.fun</span>
+      <div class="hero-badge">✦ Welcome to the Cabinet ✦</div>
+      <h1 class="hero-title">
+        <span class="title-line">The Grand</span>
+        <span class="title-line accent">Cabinet of</span>
+        <span class="title-line">Curiosities</span>
       </h1>
-      <p>A magical collection of tricks, science experiments, and wonderous curiosities pulled from the void ✨</p>
-      <div class="hero-buttons">
-        <a href="#magic" class="btn btn-primary">✨ Explore Magic</a>
-        <a href="#plans" class="btn btn-secondary">📚 Illusion Plans</a>
+      <p class="hero-subtitle">Where magic meets science, and wonder never ends.</p>
+      <div class="hero-actions">
+        <a href="#magic" class="btn btn-primary">Explore Magic ✦</a>
+        <a href="#facts" class="btn btn-ghost">Today's Fact →</a>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll to discover</span>
+        <div class="scroll-arrow"></div>
       </div>
     </div>
-    <div class="scroll-indicator">
-      <span></span>
+    <div class="hero-decoration">
+      <div class="floating-card card-1">
+        <span class="card-icon">🎩</span>
+        <span class="card-text">Daily Fact</span>
+      </div>
+      <div class="floating-card card-2">
+        <span class="card-icon">⚗️</span>
+        <span class="card-text">Science Lab</span>
+      </div>
+      <div class="floating-card card-3">
+        <span class="card-icon">🧩</span>
+        <span class="card-text">Puzzle of the Day</span>
+      </div>
     </div>
   </section>
 
-  <!-- Magic Tricks Section -->
-  <section id="magic">
-    <div class="section-container">
-      <div class="section-header fade-in">
-        <span class="section-label">✦ Choose Your Adventure ✦</span>
-        <h2 class="section-title">🎩 Magic Tricks</h2>
-        <p class="section-subtitle">Amazing tricks you can learn and perform. Click any card to reveal the secret!</p>
-      </div>
-      <div class="tricks-grid">
-        <div class="trick-card fade-in" onclick="toggleReveal(this)">
-          <span class="trick-icon">🃏</span>
-          <h3>Card to Nowhere</h3>
-          <p>A classic card vanishes into thin air and reappears behind your spectator's ear! Perfect for close-up magic.</p>
-          <span class="trick-tag tag-easy">★ Easy</span>
-          <div class="trick-reveal">
-            <p><strong>Secret:</strong> Use a false release with a spring card or gimmicked deck for the vanish! ✨</p>
-          </div>
-        </div>
-        <div class="trick-card fade-in" onclick="toggleReveal(this)">
-          <span class="trick-icon">🪄</span>
-          <h3>Levitating Spoon</h3>
-          <p>Bend metal spoons with the power of your mind! A mind-bending demonstration of mentalism.</p>
-          <span class="trick-tag tag-medium">★★ Medium</span>
-          <div class="trick-reveal">
-            <p><strong>Secret:</strong> Pre-bend the spoon slightly or use a hidden pulling wire for the effect! 🔮</p>
-          </div>
-        </div>
-        <div class="trick-card fade-in" onclick="toggleReveal(this)">
-          <span class="trick-icon">🐰</span>
-          <h3>Rabbit in a Hat</h3>
-          <p>The ultimate illusion! Make a rabbit appear from an empty top hat. The grand finale of any show!</p>
-          <span class="trick-tag tag-hard">★★★ Advanced</span>
-          <div class="trick-reveal">
-            <p><strong>Secret:</strong> Use a false bottom in the hat and a hidden compartment for the reveal! 🎩</p>
-          </div>
-        </div>
-        <div class="trick-card fade-in" onclick="toggleReveal(this)">
-          <span class="trick-icon">🔗</span>
-          <h3>Linked Rings</h3>
-          <p>Three solid metal rings pass through each other as if they're made of smoke! A timeless classic.</p>
-          <span class="trick-tag tag-medium">★★ Medium</span>
-          <div class="trick-reveal">
-            <p><strong>Secret:</strong> One ring has a hidden gap — the master ring that links and unlink everything! ✨</p>
-          </div>
-        </div>
-        <div class="trick-card fade-in" onclick="toggleReveal(this)">
-          <span class="trick-icon">💫</span>
-          <h3>Color Changing Balls</h3>
-          <p>Watch as balls magically change colors before your eyes! Vibrant and visually stunning.</p>
-          <span class="trick-tag tag-easy">★ Easy</span>
-          <div class="trick-reveal">
-            <p><strong>Secret:</strong> Use nested balls with elastic strings — squeeze to flip to the next color! 🌈</p>
-          </div>
-        </div>
-        <div class="trick-card fade-in" onclick="toggleReveal(this)">
-          <span class="trick-icon">🔮</span>
-          <h3>Mentalism: Mind Read</h3>
-          <p>Predict what someone is thinking with eerie accuracy! Leave them questioning reality itself.</p>
-          <span class="trick-tag tag-hard">★★★ Advanced</span>
-          <div class="trick-reveal">
-            <p><strong>Secret:</strong> Use a force card combined with cold reading techniques for maximum impact! 🧠</p>
-          </div>
-        </div>
+  <!-- Magic Section -->
+  <section id="magic" class="section" data-section="magic">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter I</span>
+      <h2 class="section-title">Magic Tricks</h2>
+      <p class="section-desc">Learn the secrets behind the world's most mesmerizing illusions.</p>
+    </div>
+    <div class="section-content">
+      <div class="card-grid" id="magicGrid">
+        <!-- Populated by JS from data/tricks.json -->
       </div>
     </div>
   </section>
 
   <!-- Science Section -->
-  <section id="science">
-    <div class="section-container">
-      <div class="section-header fade-in">
-        <span class="section-label">✦ Discover the Wonders ✦</span>
-        <h2 class="section-title">🔬 Science Experiments</h2>
-        <p class="section-subtitle">Fascinating science experiments that look like magic!</p>
+  <section id="science" class="section alt-bg" data-section="science">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter II</span>
+      <h2 class="section-title">Science Experiments</h2>
+      <p class="section-desc">Hands-on wonders you can try at home.</p>
+    </div>
+    <div class="section-content">
+      <div class="card-grid" id="scienceGrid">
+        <!-- Populated by JS from data/science.json -->
       </div>
-      <div class="science-grid">
-        <div class="science-card fade-in">
-          <span class="science-icon">🌈</span>
-          <h3>Prism Light Show</h3>
-          <p>Create your own rainbow using a glass prism and sunlight. Discover how white light is made of all colors!</p>
+    </div>
+  </section>
+
+  <!-- Facts Section -->
+  <section id="facts" class="section" data-section="facts">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter III</span>
+      <h2 class="section-title">Fun Facts & Discoveries</h2>
+      <p class="section-desc">Mind-blowing facts updated daily by our AI agent.</p>
+    </div>
+    <div class="section-content">
+      <div class="daily-fact-card" id="dailyFactCard">
+        <div class="daily-fact-header">
+          <span class="daily-fact-badge">✦ Fact of the Day</span>
+          <span class="daily-fact-date" id="factDate"></span>
         </div>
-        <div class="science-card fade-in">
-          <span class="science-icon">⚡</span>
-          <h3>Static Electricity</h3>
-          <p>Bend water streams with a balloon! Feel the invisible force of static electricity in action.</p>
-        </div>
-        <div class="science-card fade-in">
-          <span class="science-icon">🧪</span>
-          <h3>Non-Newtonian Fluid</h3>
-          <p>Make oobleck — a substance that's both solid and liquid! Run on it, punch it, watch it transform!</p>
-        </div>
-        <div class="science-card fade-in">
-          <span class="science-icon">🌡️</span>
-          <h3>Liquid Nitrogen Fun</h3>
-          <p>Explore the world of super-cooled substances. Freeze flowers, make ice cream, and create fog clouds!</p>
-        </div>
-        <div class="science-card fade-in">
-          <span class="science-icon">🧲</span>
-          <h3>Magnetic Levitation</h3>
-          <p>Make objects float using magnetic forces! Learn about diamagnetism and electromagnetic suspension.</p>
-        </div>
-        <div class="science-card fade-in">
-          <span class="science-icon">💧</span>
-          <h3>Surface Tension Magic</h3>
-          <p>Watch pepper dance on water and create soap-powered boats! The invisible skin of water revealed.</p>
+        <h3 class="daily-fact-title" id="factTitle">Loading...</h3>
+        <p class="daily-fact-body" id="factBody">Our AI agent is fetching today's wonder...</p>
+        <div class="daily-fact-source" id="factSource"></div>
+      </div>
+      <div class="card-grid" id="factsGrid">
+        <!-- Populated by JS from data/facts.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Puzzles Section -->
+  <section id="puzzles" class="section alt-bg" data-section="puzzles">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter IV</span>
+      <h2 class="section-title">Puzzles & Riddles</h2>
+      <p class="section-desc">Test your wits against our collection of brain teasers.</p>
+    </div>
+    <div class="section-content">
+      <div class="puzzle-card" id="dailyPuzzle">
+        <span class="puzzle-badge">✦ Riddle of the Day</span>
+        <h3 class="puzzle-question" id="puzzleQuestion">Loading...</h3>
+        <button class="btn btn-ghost btn-sm reveal-answer" id="revealBtn">Show Answer</button>
+        <p class="puzzle-answer" id="puzzleAnswer" style="display:none;"></p>
+      </div>
+      <div class="card-grid" id="puzzlesGrid">
+        <!-- Populated by JS from data/puzzles.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section id="history" class="section" data-section="history">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter V</span>
+      <h2 class="section-title">History of Magic</h2>
+      <p class="section-desc">The fascinating stories behind the world's greatest magicians and their legendary tricks.</p>
+    </div>
+    <div class="section-content">
+      <div class="timeline" id="historyTimeline">
+        <!-- Populated by JS from data/history.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Illusion Plans Library Section -->
+  <section id="illusions" class="section" data-section="illusions">
+    <div class="section-header">
+      <span class="section-tag">✦ The Grand Archive</span>
+      <h2 class="section-title">Illusion Plans Library</h2>
+      <p class="section-desc">A curated collection of magic books, illusion blueprints, and secret manuscripts. Download and explore the art of illusion.</p>
+    </div>
+    <div class="section-content">
+      <div class="illusion-filter-bar" id="illusionFilterBar">
+        <button class="illusion-filter-btn active" data-filter="all">✦ All</button>
+        <button class="illusion-filter-btn" data-filter="Illusions">🎭 Illusions</button>
+        <button class="illusion-filter-btn" data-filter="Magic Secrets">🔮 Magic Secrets</button>
+        <button class="illusion-filter-btn" data-filter="Stage Illusions">🎪 Stage</button>
+        <button class="illusion-filter-btn" data-filter="Suspension">🪄 Suspension</button>
+        <button class="illusion-filter-btn" data-filter="Levitation">✨ Levitation</button>
+        <button class="illusion-filter-btn" data-filter="Rope Magic">🪢 Rope Magic</button>
+        <button class="illusion-filter-btn" data-filter="Tricks">🃏 Tricks</button>
+      </div>
+      <div class="illusion-search-bar">
+        <input type="text" class="illusion-search-input" id="illusionSearchInput" placeholder="Search titles, authors, or descriptions...">
+      </div>
+      <div class="card-grid" id="illusionsGrid">
+        <!-- Populated by JS from data/illusions.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Gaussian Splat Gallery Section -->
+  <section id="splats" class="section" data-section="splats">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter VII</span>
+      <h2 class="section-title">Splat Gallery</h2>
+      <p class="section-desc">Step inside a real 3D scene — a gaussian splat capture rendered live in your browser. Drag to look around, scroll to zoom.</p>
+    </div>
+    <div class="section-content">
+      <div class="splat-stage" id="splatStage">
+        <!-- Viewer iframe is injected here on demand (the scene is ~25MB) -->
+        <div class="splat-placeholder" id="splatPlaceholder">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="splat-icon">
+            <circle cx="32" cy="32" r="18" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+            <ellipse cx="32" cy="32" rx="26" ry="9" stroke="var(--accent-light)" stroke-width="1.2" opacity="0.5" transform="rotate(-18 32 32)"/>
+            <circle cx="32" cy="32" r="4" fill="var(--accent)" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+          <h3 class="splat-title">The Van</h3>
+          <p class="splat-desc">A photoreal gaussian splat scene, rendered in real time with WebGPU.</p>
+          <div class="splat-actions">
+            <button class="btn btn-primary" id="loadSplatBtn">✦ Enter the Scene</button>
+            <a href="splats/van.html" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Open in new tab ↗</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Random Fun Section -->
-  <section id="fun">
-    <div class="section-container">
-      <div class="section-header fade-in">
-        <span class="section-label">✦ Random Wonder ✦</span>
-        <h2 class="section-title">🎲 Fun & Curiosities</h2>
-        <p class="section-subtitle">Random fascinating stuff that'll blow your mind!</p>
-      </div>
-      <div class="fun-grid">
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🌀</span>
-          <h3>Optical Illusions</h3>
-          <p>Images that trick your brain. Is the pattern moving? Is it spinning? Your eyes lie to you!</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🎵</span>
-          <h3>Impossible Sounds</h3>
-          <p>Shepard tones that seem to endlessly rise. Music that goes in circles but never stops climbing!</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🧩</span>
-          <h3>Logic Puzzles</h3>
-          <p>Brain teasers that will make you question everything. Can you solve them all? Probably not! 😄</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🦋</span>
-          <h3>Fractal Patterns</h3>
-          <p>Infinite complexity from simple math. Zoom forever and never find the same pattern twice!</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🎭</span>
-          <h3>Paradox Explained</h3>
-          <p>Time travel paradoxes, grandfather puzzles, and the nature of reality itself. Buckle up!</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">✨</span>
-          <h3>Quantum Weirdness</h3>
-          <p>Particles in two places at once. Schrödinger's cat. Reality is stranger than fiction!</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🌌</span>
-          <h3>Space Oddities</h3>
-          <p>Neutron stars, black holes, and the vast emptiness between. The universe is absolutely wild!</p>
-        </div>
-        <div class="fun-card fade-in">
-          <span class="fun-icon">🧠</span>
-          <h3>Brain Hacks</h3>
-          <p>Psychological tricks to influence perception. Memory palaces, priming, and cognitive illusions!</p>
-        </div>
-      </div>
+  <!-- AI Corner Section -->
+  <section id="ai-corner" class="section alt-bg" data-section="ai">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter VI</span>
+      <h2 class="section-title">AI Corner</h2>
+      <p class="section-desc">Where artificial intelligence meets artificial wonder.</p>
     </div>
-  </section>
-
-  <!-- Illusion Plans Section -->
-  <section id="plans">
-    <div class="section-container">
-      <div class="section-header fade-in">
-        <span class="section-label">✦ Behind the Curtain ✦</span>
-        <h2 class="section-title">📚 Illusion Plans</h2>
-        <p class="section-subtitle">Download detailed plans and blueprints for building magical illusions!</p>
+    <div class="section-content">
+      <div class="ai-status-card">
+        <div class="ai-status-header">
+          <div class="ai-avatar">
+            <svg viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2" opacity="0.6"/>
+              <circle cx="20" cy="20" r="10" stroke="var(--accent)" stroke-width="1.5" opacity="0.4">
+                <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="20" cy="20" r="4" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <div class="ai-status-info">
+            <h4 class="ai-status-name">CurioBot</h4>
+            <p class="ai-status-desc">Your AI content curator</p>
+          </div>
+          <span class="ai-status-badge active">● Active</span>
+        </div>
+        <div class="ai-status-body">
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiFactsCount">0</span>
+            <span class="ai-metric-label">Facts Indexed</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiTricksCount">0</span>
+            <span class="ai-metric-label">Tricks Cataloged</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiLastUpdate">—</span>
+            <span class="ai-metric-label">Last Update</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiNextUpdate">—</span>
+            <span class="ai-metric-label">Next Update</span>
+          </div>
+        </div>
+        <div class="ai-log" id="aiLog">
+          <p class="ai-log-entry">✦ CurioBot initialized. Monitoring content feeds...</p>
+        </div>
       </div>
-      <div class="plans-search fade-in">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="planSearch" placeholder="Search plans..." oninput="filterPlans()">
-      </div>
-      <div class="plans-list" id="plansList">
-        <!-- Plans will be populated by JavaScript -->
+      <div class="ai-actions">
+        <button class="btn btn-primary" id="fetchFactsBtn">✦ Fetch New Facts</button>
+        <button class="btn btn-ghost" id="regeneratePuzzleBtn">🔄 New Puzzle</button>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
-    <p>Made with <span class="heart">♥</span> and a touch of magic ✨ © 2026 TopHat.fun</p>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span>TopHat<span class="logo-dot">.fun</span></span>
+      </div>
+      <p class="footer-tagline">Crafted with wonder ✦ Powered by curiosity</p>
+      <p class="footer-copy">&copy; 2025 tophat.fun — All rights reserved.</p>
+    </div>
   </footer>
 
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+  <script src="js/ai-agent.js"></script>
   <script>
-    // ===== ILLUSION PLANS DATA =====
-    const plans = [
-      { name: "Advanced Illusion Projects by Tim Clothier", file: "Advanced-illusion-projects-by-tim-clothier.pdf", size: "9.4 MB" },
-      { name: "Exclusive Magical Secrets - The Famous Locked Book of Magic", file: "Exclusive Magical Secrets - The Famous Locked Book of Magic.pdf", size: "9.8 MB" },
-      { name: "Great Tricks", file: "Great-Tricks.pdf", size: "18.6 MB" },
-      { name: "Magical Rope Ties and Escapes", file: "MagicalRopeTiesandEscapes.pdf", size: "1.1 MB" },
-      { name: "Magical Rope Ties and Escapes (LMT)", file: "MagicalRopeTiesandescapes-LMT.pdf", size: "1.1 MB" },
-      { name: "Paul Osborne - Illusion Systems 3", file: "Paul Osborne - Illusion Systems 3.pdf", size: "20.6 MB" },
-      { name: "Paul Osborne - Illusion Systems 4", file: "Paul Osborne - Illusion Systems 4.pdf", size: "23.4 MB" },
-      { name: "Fifteen Great Illusions (An Abbott Publication)", file: "fifteen-great-illusions-an-abbott-publication.pdf", size: "770 KB" },
-      { name: "Nite Club Illusions", file: "nite-club-illusions.pdf", size: "2.6 MB" },
-      { name: "Paul Osborne - Easy to Build Illusions", file: "paul-osborne-easy-to-build-illusions.pdf", size: "12.1 MB" },
-      { name: "Paul Osborne - Haunted Illusions 7", file: "paul-osborne-haunted-illusions-7.pdf", size: "67.8 MB" },
-      { name: "Paul Osborne Illusion Systems 1", file: "paul_osborne_illusion_systems_1.pdf", size: "10.6 MB" },
-      { name: "Paul Osborne Illusion Systems 2", file: "paul_osborne_illusion_systems_2.pdf", size: "19.4 MB" },
-      { name: "UF Grant - Grant's Aerial Suspension", file: "uf-grant-grant39s-aerial-suspension.pdf", size: "93 KB" },
-      { name: "UF Grant - Illusion Secrets", file: "uf-grant-illusion-secrets.pdf", size: "612 KB" },
-      { name: "UF Grant - Modern Levitations", file: "uf-grant-modern-levitations.pdf", size: "422 KB" },
-      { name: "UF Grant - Victory Carton Illusions", file: "uf-grant-victory-carton-illusions.pdf", size: "2.2 MB" },
-      { name: "Will Goldston - Secrets of Famous Illusionists", file: "will-goldston-secrets-of-famous-illusionists.pdf", size: "2.4 MB" },
-      { name: "Will Goldston - Stage Illusions", file: "will-goldston-stage-illusions.pdf", size: "10.3 MB" }
-    ];
-
-    // ===== RENDER PLANS =====
-    function renderPlans(filteredPlans) {
-      const list = document.getElementById('plansList');
-      list.innerHTML = '';
-      filteredPlans.forEach(plan => {
-        const item = document.createElement('a');
-        item.className = 'plan-item fade-in';
-        item.href = plan.file;
-        item.download = plan.file;
-        item.innerHTML = `
-          <span class="plan-icon">📄</span>
-          <div class="plan-info">
-            <div class="plan-name">${plan.name}</div>
-            <div class="plan-meta">${plan.size}</div>
-          </div>
-          <span class="plan-download">↓</span>
-        `;
-        list.appendChild(item);
-      });
-      // Re-trigger fade-in animations
-      setTimeout(() => {
-        document.querySelectorAll('.plan-item').forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 50);
-        });
-      }, 50);
-    }
-
-    renderPlans(plans);
-
-    // ===== SEARCH FILTER =====
-    function filterPlans() {
-      const query = document.getElementById('planSearch').value.toLowerCase();
-      const filtered = plans.filter(p => p.name.toLowerCase().includes(query));
-      renderPlans(filtered);
-    }
-
-    // ===== NAVIGATION =====
-    function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
-    }
-
-    // Close mobile nav on link click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('navLinks').classList.remove('open');
-      });
-    });
-
-    // ===== NAV SCROLL EFFECT =====
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
-
-    // ===== SCROLL REVEAL ANIMATIONS =====
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ===== SPARKLE CANVAS =====
-    const canvas = document.getElementById('sparkle-canvas');
-    const ctx = canvas.getContext('2d');
-    let sparkles = [];
-    let mouseX = 0, mouseY = 0;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    class Sparkle {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = (Math.random() - 0.5) * 2;
-        this.speedY = (Math.random() - 0.5) * 2;
-        this.opacity = 1;
-        this.decay = Math.random() * 0.02 + 0.01;
-        this.color = ['#8b5cf6', '#3b82f6', '#06b6d4', '#ec4899', '#f59e0b', '#ffffff'][Math.floor(Math.random() * 6)];
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.opacity -= this.decay;
-        this.size *= 0.99;
-      }
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        // Draw a 4-point star
-        for (let i = 0; i < 4; i++) {
-          const angle = (i * Math.PI) / 2;
-          const outerX = this.x + Math.cos(angle) * this.size * 2;
-          const outerY = this.y + Math.sin(angle) * this.size * 2;
-          const innerAngle = angle + Math.PI / 4;
-          const innerX = this.x + Math.cos(innerAngle) * this.size;
-          const innerY = this.y + Math.sin(innerAngle) * this.size;
-          if (i === 0) ctx.moveTo(outerX, outerY);
-          else ctx.lineTo(outerX, outerY);
-          ctx.lineTo(innerX, innerY);
-        }
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
-      }
-    }
-
-    // Ambient sparkles
-    function addAmbientSparkle() {
-      if (sparkles.length < 50) {
-        sparkles.push(new Sparkle(
-          Math.random() * canvas.width,
-          Math.random() * canvas.height
-        ));
-      }
-    }
-    setInterval(addAmbientSparkle, 200);
-
-    // Mouse sparkle trail
-    let lastMouseSparkle = 0;
-    document.addEventListener('mousemove', (e) => {
-      const now = Date.now();
-      if (now - lastMouseSparkle > 50) {
-        for (let i = 0; i < 2; i++) {
-          sparkles.push(new Sparkle(e.clientX, e.clientY));
-        }
-        lastMouseSparkle = now;
-      }
-    });
-
-    function animateSparkles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      sparkles = sparkles.filter(s => s.opacity > 0);
-      sparkles.forEach(s => {
-        s.update();
-        s.draw();
-      });
-      requestAnimationFrame(animateSparkles);
-    }
-    animateSparkles();
-
-    // ===== TRICK REVEAL TOGGLE =====
-    function toggleReveal(card) {
-      const reveal = card.querySelector('.trick-reveal');
-      if (reveal) {
-        reveal.classList.toggle('show');
-      }
-    }
-
-    // ===== RANDOM FACT GENERATOR =====
-    const funFacts = [
-      "🎩 A top hat can hold up to 3 gallons of liquid!",
-      "🔮 Magicians have been performing tricks for over 2,900 years!",
-      "🧲 The first recorded illusionist was a Greek philosopher named Diopitas!",
-      "🐰 The rabbit-from-a-hat trick dates back to ancient Egypt!",
-      "✨ Card magic was first documented in Egypt around 2000 BC!",
-      "🌟 The word 'magic' comes from the Persian word 'magi'!",
-      "🎭 The first magic shop opened in Paris in 1870!",
-      "💫 Harry Houdini could escape from any restraint in under 3 minutes!",
-      "🌀 The Penrose stairs are an impossible object that looks like a staircase!",
-      "🧠 Your brain can process images in as little as 13 milliseconds!"
-    ];
-
-    // Change fun fact on hero button hover
-    const heroBtn = document.querySelector('.hero-buttons .btn-primary');
-    if (heroBtn) {
-      heroBtn.addEventListener('mouseenter', () => {
-        const fact = funFacts[Math.floor(Math.random() * funFacts.length)];
-        heroBtn.textContent = fact;
-      });
-      heroBtn.addEventListener('mouseleave', () => {
-        heroBtn.textContent = '✨ Explore Magic';
-      });
-    }
-
-    // ===== SMOOTH SECTION TRANSITIONS =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // ===== EASTER EGG: Konami Code =====
-    let konamiCode = [];
-    const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-    document.addEventListener('keydown', (e) => {
-      konamiCode.push(e.keyCode);
-      if (konamiCode.length > konamiSequence.length) {
-        konamiCode.shift();
-      }
-      if (konamiCode.toString() === konamiSequence.toString()) {
-        document.body.style.animation = 'none';
-        document.body.style.filter = 'hue-rotate(180deg)';
-        setTimeout(() => {
-          document.body.style.filter = 'none';
-        }, 3000);
-        alert('🎩✨ You found the secret! You are truly magical! ✨🎩');
-      }
-    });
-
-    console.log('%c🎩 Welcome to TopHat.fun! ✨', 'font-size: 24px; font-weight: bold; color: #8b5cf6;');
-    console.log('%cTry the Konami code for a secret surprise! ↑↑↓↓←→←→BA', 'font-size: 14px; color: #06b6d4;');
+    // Inline illusion data for file:// protocol fallback
+    window.__illusionsData = [
+  {
+    "title": "Advanced Illusion Projects",
+    "author": "Tim Clothier",
+    "category": "Illusions",
+    "description": "A comprehensive guide to building advanced magic illusions and stage effects.",
+    "filename": "Advanced-illusion-projects-by-tim-clothier.pdf",
+    "size_mb": 9.4
+  },
+  {
+    "title": "Fifteen Great Illusions",
+    "author": "Abbott",
+    "category": "Illusions",
+    "description": "An Abbott publication featuring fifteen of the greatest stage illusions ever devised.",
+    "filename": "fifteen-great-illusions-an-abbott-publication.pdf",
+    "size_mb": 0.8
+  }
+];
   </script>
 </body>
 </html>
