@@ -6,12 +6,15 @@ A magical, science-filled website with an AI-powered content agent.
 
 ```
 tophat.fun/
-├── index.html          # Main site
+├── index.html          # Main site — previews of every section, links to full pages
+├── magic.html ... ai.html  # One full page per section (GENERATED — see below)
 ├── css/
 │   └── style.css       # Dark elegant theme with glassmorphism
 ├── js/
 │   ├── main.js         # UI, card rendering, particles, scroll effects
 │   └── ai-agent.js     # CurioBot AI agent (auto-updates content)
+├── tools/
+│   └── generate-pages.py  # Regenerates the per-section pages from index.html
 ├── data/
 │   ├── tricks.json     # Magic tricks
 │   ├── science.json    # Science experiments
@@ -22,6 +25,24 @@ tophat.fun/
 ├── *.pdf               # Illusion Plans — 17 PDFs, AT THE PAGE ROOT
 └── splat_*.html        # Gaussian splat gallery — 7 pages, AT THE PAGE ROOT
 ```
+
+### Section full pages (generated)
+
+`index.html` is the hub: it shows a **preview** of every section (first three cards /
+timeline entries per list, plus each section's "View all" button), and both the nav menu
+and those buttons link to a standalone page per category — `magic.html`, `science.html`,
+`facts.html`, `puzzles.html`, `history.html`, `illusions.html`, `splats.html`, `ai.html`.
+Each full page carries the same nav, theme, and complete content.
+
+The pages are generated from `index.html` by `tools/generate-pages.py`:
+
+```sh
+python3 tools/generate-pages.py   # re-run after editing index.html sections/nav
+```
+
+Preview limits live in `js/main.js` (`PREVIEW_LIMIT`, applied only when the body has
+`data-preview="true"`, which is set on `index.html`). The generated pages are committed —
+static hosts serve them as-is.
 
 ### Asset paths are root-relative (important)
 

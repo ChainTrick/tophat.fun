@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Corner — TopHat.fun</title>
+  <meta name="description" content="Where artificial intelligence meets artificial wonder.">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hat crown -->
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <!-- Hat band -->
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <!-- Brim -->
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <!-- Crown top highlight -->
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- Sparkle -->
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span class="logo-text">TopHat</span><span class="logo-dot">.fun</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="magic.html" data-section="magic">Magic</a></li><li><a href="science.html" data-section="science">Science</a></li><li><a href="facts.html" data-section="facts">Facts</a></li><li><a href="puzzles.html" data-section="puzzles">Puzzles</a></li><li><a href="history.html" data-section="history">History</a></li><li><a href="illusions.html" data-section="illusions">Illusions</a></li><li><a href="splats.html" data-section="splats">Splat Gallery</a></li><li><a href="ai.html" data-section="ai" class="active">AI Corner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section-hero">
+    <div class="section-hero-inner">
+      <a href="index.html#hero" class="back-link">&larr; Back to Home</a>
+      <span class="section-tag">✦ Chapter VI</span>
+      <h1 class="section-hero-title">AI Corner</h1>
+      <p class="section-desc">Where artificial intelligence meets artificial wonder.</p>
+    </div>
+  </section>
+<section id="ai-corner" class="section alt-bg" data-section="ai">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter VI</span>
+      <h2 class="section-title">AI Corner</h2>
+      <p class="section-desc">Where artificial intelligence meets artificial wonder.</p>
+    </div>
+    <div class="section-content">
+      <div class="ai-status-card">
+        <div class="ai-status-header">
+          <div class="ai-avatar">
+            <svg viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2" opacity="0.6"/>
+              <circle cx="20" cy="20" r="10" stroke="var(--accent)" stroke-width="1.5" opacity="0.4">
+                <animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="20" cy="20" r="4" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <div class="ai-status-info">
+            <h4 class="ai-status-name">CurioBot</h4>
+            <p class="ai-status-desc">Your AI content curator</p>
+          </div>
+          <span class="ai-status-badge active">● Active</span>
+        </div>
+        <div class="ai-status-body">
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiFactsCount">0</span>
+            <span class="ai-metric-label">Facts Indexed</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiTricksCount">0</span>
+            <span class="ai-metric-label">Tricks Cataloged</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiLastUpdate">—</span>
+            <span class="ai-metric-label">Last Update</span>
+          </div>
+          <div class="ai-metric">
+            <span class="ai-metric-value" id="aiNextUpdate">—</span>
+            <span class="ai-metric-label">Next Update</span>
+          </div>
+        </div>
+        <div class="ai-log" id="aiLog">
+          <p class="ai-log-entry">✦ CurioBot initialized. Monitoring content feeds...</p>
+        </div>
+      </div>
+      <div class="ai-actions">
+        <button class="btn btn-primary" id="fetchFactsBtn">✦ Fetch New Facts</button>
+        <button class="btn btn-ghost" id="regeneratePuzzleBtn">🔄 New Puzzle</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span>TopHat<span class="logo-dot">.fun</span></span>
+      </div>
+      <p class="footer-tagline">Crafted with science ✦ Powered by curiosity</p>
+      <p class="footer-copy">&copy; 2026 TopHat.fun - All rights reserved.</p>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+  <script src="js/ai-agent.js"></script>
+</body>
+</html>

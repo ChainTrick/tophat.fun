@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzles & Riddles — TopHat.fun</title>
+  <meta name="description" content="Test your wits against our collection of brain teasers.">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hat crown -->
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <!-- Hat band -->
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <!-- Brim -->
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <!-- Crown top highlight -->
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- Sparkle -->
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span class="logo-text">TopHat</span><span class="logo-dot">.fun</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="magic.html" data-section="magic">Magic</a></li><li><a href="science.html" data-section="science">Science</a></li><li><a href="facts.html" data-section="facts">Facts</a></li><li><a href="puzzles.html" data-section="puzzles" class="active">Puzzles</a></li><li><a href="history.html" data-section="history">History</a></li><li><a href="illusions.html" data-section="illusions">Illusions</a></li><li><a href="splats.html" data-section="splats">Splat Gallery</a></li><li><a href="ai.html" data-section="ai">AI Corner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section-hero">
+    <div class="section-hero-inner">
+      <a href="index.html#hero" class="back-link">&larr; Back to Home</a>
+      <span class="section-tag">✦ Chapter IV</span>
+      <h1 class="section-hero-title">Puzzles & Riddles</h1>
+      <p class="section-desc">Test your wits against our collection of brain teasers.</p>
+    </div>
+  </section>
+<section id="puzzles" class="section alt-bg" data-section="puzzles">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter IV</span>
+      <h2 class="section-title">Puzzles & Riddles</h2>
+      <p class="section-desc">Test your wits against our collection of brain teasers.</p>
+    </div>
+    <div class="section-content">
+      <div class="puzzle-card" id="dailyPuzzle">
+        <span class="puzzle-badge">✦ Riddle of the Day</span>
+        <h3 class="puzzle-question" id="puzzleQuestion">Loading...</h3>
+        <button class="btn btn-ghost btn-sm reveal-answer" id="revealBtn">Show Answer</button>
+        <p class="puzzle-answer" id="puzzleAnswer" style="display:none;"></p>
+      </div>
+      <div class="card-grid" id="puzzlesGrid">
+        <!-- Populated by JS from data/puzzles.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span>TopHat<span class="logo-dot">.fun</span></span>
+      </div>
+      <p class="footer-tagline">Crafted with science ✦ Powered by curiosity</p>
+      <p class="footer-copy">&copy; 2026 TopHat.fun - All rights reserved.</p>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

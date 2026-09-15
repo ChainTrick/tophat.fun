@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Splat Gallery — TopHat.fun</title>
+  <meta name="description" content="Step inside real 3D scenes — gaussian splat captures rendered live in your browser. Pick a scene, then drag to look around and scroll to zoom.">
+  <meta name="theme-color" content="#0a0a1a">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hat crown -->
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <!-- Hat band -->
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <!-- Brim -->
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <!-- Crown top highlight -->
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- Sparkle -->
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span class="logo-text">TopHat</span><span class="logo-dot">.fun</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="magic.html" data-section="magic">Magic</a></li><li><a href="science.html" data-section="science">Science</a></li><li><a href="facts.html" data-section="facts">Facts</a></li><li><a href="puzzles.html" data-section="puzzles">Puzzles</a></li><li><a href="history.html" data-section="history">History</a></li><li><a href="illusions.html" data-section="illusions">Illusions</a></li><li><a href="splats.html" data-section="splats" class="active">Splat Gallery</a></li><li><a href="ai.html" data-section="ai">AI Corner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section-hero">
+    <div class="section-hero-inner">
+      <a href="index.html#hero" class="back-link">&larr; Back to Home</a>
+      <span class="section-tag">✦ Chapter VII</span>
+      <h1 class="section-hero-title">Splat Gallery</h1>
+      <p class="section-desc">Step inside real 3D scenes — gaussian splat captures rendered live in your browser. Pick a scene, then drag to look around and scroll to zoom.</p>
+    </div>
+  </section>
+<section id="splats" class="section" data-section="splats">
+    <div class="section-header">
+      <span class="section-tag">✦ Chapter VII</span>
+      <h2 class="section-title">Splat Gallery</h2>
+      <p class="section-desc">Step inside real 3D scenes — gaussian splat captures rendered live in your browser. Pick a scene, then drag to look around and scroll to zoom.</p>
+    </div>
+    <div class="section-content">
+      <div class="splat-picker" id="splatPicker">
+        <button class="splat-pick-btn active" data-scene="splat_van" data-title="The Van" data-desc="See if you can spot the guy operating the drone that took the picture!">✦ The Van</button>
+      <button class="splat-pick-btn" data-scene="splat_ferris2" data-title="Skywheel" data-desc="Ferris Wheel in Panama City Beach, FL">✦ Ferris Wheel</button>
+        <button class="splat-pick-btn" data-scene="splat_building" data-title="The Building" data-desc="An architectural capture — walk around the structure and peek inside.">🏛️ The Building</button>
+        <button class="splat-pick-btn" data-scene="splat_construction" data-title="Construction Site" data-desc="A busy worksite, captured in glorious splat detail.">🚧 Construction</button>
+        <button class="splat-pick-btn" data-scene="splat_gourd" data-title="The Gourd" data-desc="A gourd, scanned in glorious splat detail.">🎃 The Gourd</button>
+        <button class="splat-pick-btn" data-scene="splat_aloe" data-title="Aloe Vera" data-desc="A potted aloe plant, captured leaf by leaf.">🪴 Aloe Vera</button>
+        <button class="splat-pick-btn" data-scene="splat_dinnerfor2" data-title="Dinner For 2" data-desc="A father and son sitting in a cove">Dinner For 2</button>
+        <button class="splat-pick-btn" data-scene="splat_haircut" data-title="The Haircut" data-desc="A close-up capture — drag to orbit around the scene.">💈 The Haircut</button>
+        <button class="splat-pick-btn" data-scene="splat_zombie" data-title="Zombie" data-desc="An eerie character capture, rendered live in your browser.">🧟 Zombie</button>
+      </div>
+      <div class="splat-stage" id="splatStage">
+        <!-- Viewer iframe is injected here on demand (scenes are 10–55MB) -->
+        <div class="splat-placeholder" id="splatPlaceholder">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="splat-icon">
+            <circle cx="32" cy="32" r="18" stroke="var(--accent)" stroke-width="1.5" opacity="0.7"/>
+            <ellipse cx="32" cy="32" rx="26" ry="9" stroke="var(--accent-light)" stroke-width="1.2" opacity="0.5" transform="rotate(-18 32 32)"/>
+            <circle cx="32" cy="32" r="4" fill="var(--accent)" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+          <h3 class="splat-title" id="splatTitle">The Van</h3>
+          <p class="splat-desc" id="splatDesc">See if you can spot the guy operating the drone that took the picture!</p>
+          <div class="splat-actions">
+            <button class="btn btn-primary" id="loadSplatBtn">✦ Enter the Scene</button>
+            <a href="splat_van.html" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" id="openNewTabLink">Open in new tab ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 38 L18 18 C18 14 22 12 32 12 C42 12 46 14 46 18 L46 38" fill="var(--accent)" opacity="0.85"/>
+          <rect x="18" y="30" width="28" height="4" rx="1" fill="var(--accent)" opacity="0.6"/>
+          <ellipse cx="32" cy="40" rx="24" ry="4" fill="var(--accent)" opacity="0.7"/>
+          <path d="M24 14 C24 12 28 10 32 10 C36 10 40 12 40 14" stroke="var(--accent-light)" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="32" cy="22" r="1.5" fill="var(--accent-light)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <span>TopHat<span class="logo-dot">.fun</span></span>
+      </div>
+      <p class="footer-tagline">Crafted with science ✦ Powered by curiosity</p>
+      <p class="footer-copy">&copy; 2026 TopHat.fun - All rights reserved.</p>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

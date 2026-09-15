@@ -16,6 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
 });
 
+/* ── Preview mode ──
+   index.html sets <body data-preview="true"> and shows only a preview of each
+   section; the standalone pages (magic.html, science.html, ...) have no such
+   attribute and render every item. */
+const PREVIEW_LIMIT = 3;
+function previewSlice(items) {
+  return document.body.dataset.preview === 'true' ? items.slice(0, PREVIEW_LIMIT) : items;
+}
+
 /* ── Load Content from JSON ── */
 async function loadContent() {
   await loadCards('magicGrid', 'data/tricks.json', renderTrickCard);
@@ -35,7 +44,7 @@ async function loadCards(containerId, jsonPath, renderFn) {
   try {
     const response = await fetch(jsonPath);
     const data = await response.json();
-    container.innerHTML = data.map(renderFn).join('');
+    container.innerHTML = previewSlice(data).map(renderFn).join('');
     container.querySelectorAll('.card').forEach((card, i) => {
       card.style.animationDelay = `${i * 0.1}s`;
     });
@@ -96,7 +105,7 @@ async function loadPuzzles() {
   try {
     const response = await fetch('data/puzzles.json');
     const data = await response.json();
-    container.innerHTML = data.map(puzzle => `
+    container.innerHTML = previewSlice(data).map(puzzle => `
       <div class="card reveal">
         <span class="card-tag">${puzzle.category}</span>
         <h3 class="card-title">${puzzle.question}</h3>
@@ -125,7 +134,7 @@ async function loadHistory() {
   try {
     const response = await fetch('data/history.json');
     const data = await response.json();
-    container.innerHTML = data.map(item => `
+    container.innerHTML = previewSlice(data).map(item => `
       <div class="timeline-item reveal">
         <div class="timeline-year">${item.year}</div>
         <h3 class="timeline-title">${item.title}</h3>
@@ -212,7 +221,7 @@ function renderIllusions(container, data) {
     return;
   }
 
-  container.innerHTML = filtered.map((item, i) => `
+  container.innerHTML = previewSlice(filtered).map((item, i) => `
     <div class="card illusion-card reveal" data-category="${item.category}">
       <span class="card-tag">${item.category}</span>
       <h3 class="card-title">${item.title}</h3>
