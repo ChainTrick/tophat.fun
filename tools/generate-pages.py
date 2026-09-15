@@ -98,12 +98,11 @@ def build_page(key, tag, title, desc, section_html, html):
         if m:
             scripts += m.group(0).rstrip() + "\n"
 
+    # Slim hero: only the "Back to Home" link. The chapter tag / title /
+    # description are shown once in the section header below (see index.html).
     hero = f"""  <section class="section-hero">
     <div class="section-hero-inner">
       <a href="index.html#hero" class="back-link">&larr; Back to Home</a>
-      <span class="section-tag">{tag}</span>
-      <h1 class="section-hero-title">{title}</h1>
-      <p class="section-desc">{desc}</p>
     </div>
   </section>
 """
