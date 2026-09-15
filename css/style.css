@@ -1174,10 +1174,12 @@ body {
 }
 
 /* ── Section Full Pages & Previews ── */
+/* Slim hero strip on full pages — only the "Back to Home" link lives here;
+   chapter tag / title / description are shown once in the section header below. */
 .section-hero {
   position: relative;
   z-index: 1;
-  padding: 8rem 2rem 3.5rem;
+  padding: 6.75rem 2rem 0;
   text-align: center;
   overflow: hidden;
 }
@@ -1209,29 +1211,11 @@ body {
 
 .back-link:hover { color: var(--accent-light); }
 
-.section-hero .section-tag { margin-bottom: 1rem; }
-
-.section-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
-  animation: fadeInUp 0.8s ease-out both;
-}
-
-.section-hero .section-desc {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  max-width: 640px;
-  margin: 0 auto;
-}
-
 /* "View all" button in index.html section headers */
 .view-all-btn { display: inline-block; margin-top: 1.25rem; }
 
 @media (max-width: 768px) {
-  .section-hero { padding: 7rem 1.5rem 2.5rem; }
+  .section-hero { padding: 6.25rem 1.5rem 0; }
 }
 
 /* ── Reduced Motion ── */
