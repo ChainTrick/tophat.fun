@@ -112,8 +112,25 @@ async function loadPuzzles() {
         <div class="card-meta">
           <span>⚡ ${puzzle.difficulty}</span>
         </div>
+        <button class="btn btn-ghost btn-sm reveal-answer card-reveal-btn" type="button">Show Answer</button>
+        <p class="puzzle-answer" style="display:none;">${puzzle.answer}</p>
       </div>
     `).join('');
+
+    // Every riddle in the grid can reveal its own answer (event delegation —
+    // cards are re-created on every render, so bind once to the container).
+    if (!container.dataset.revealBound) {
+      container.dataset.revealBound = '1';
+      container.addEventListener('click', e => {
+        const btn = e.target.closest('.card-reveal-btn');
+        if (!btn || !container.contains(btn)) return;
+        const answerEl = btn.parentElement.querySelector('.puzzle-answer');
+        if (!answerEl) return;
+        const hidden = answerEl.style.display === 'none';
+        answerEl.style.display = hidden ? 'block' : 'none';
+        btn.textContent = hidden ? 'Hide Answer' : 'Show Answer';
+      });
+    }
 
     // Set daily puzzle
     const today = new Date();
@@ -596,5 +613,9 @@ document.getElementById('regeneratePuzzleBtn')?.addEventListener('click', async 
     btn.addEventListener('click', () => selectScene(btn));
   });
 
+  // The "Enter the Scene" button still works as a manual trigger / retry, but
+  // the first scene loads automatically on page load so visitors never have
+  // to click anything to see it.
   if (loadBtn) loadBtn.addEventListener('click', loadViewer);
+  loadViewer();
 })();
