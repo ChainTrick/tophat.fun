@@ -64,5 +64,49 @@
     "timeNeeded": "3-7 days",
     "safetyLevel": "Supervision required",
     "tags": ["chemistry", "crystals", "growth"]
+  },
+  {
+    "id": 7,
+    "title": "Levitating Pencil",
+    "category": "Physics",
+    "difficulty": "Easy",
+    "description": "Make a magnet float in mid-air with nothing but a pencil. Slide two ring magnets onto a sharpened pencil with like poles facing — the second one hovers, held up purely by magnetic repulsion.",
+    "materials": ["2-3 neodymium ring magnets (1 inch)", "Wooden pencil", "Flat table"],
+    "timeNeeded": "5 min",
+    "safetyLevel": "Safe (magnets are strong — keep away from phones and credit cards)",
+    "tags": ["physics", "magnetism", "levitation"]
+  },
+  {
+    "id": 8,
+    "title": "Splitting Water with Electricity",
+    "category": "Chemistry",
+    "difficulty": "Medium",
+    "description": "Electrolysis: run a 9V battery through salt water and watch it split into hydrogen and oxygen bubbles. Collect both gases in test tubes — you'll get exactly twice as much hydrogen, proving water is H₂O.",
+    "materials": ["9V battery", "2 insulated wires with alligator clips", "2 small test tubes or straws", "Baking soda (a pinch)", "Water", "Shallow dish"],
+    "timeNeeded": "30 min",
+    "safetyLevel": "Supervision required — no open flames, don't inhale the gas",
+    "tags": ["chemistry", "electrolysis", "gases"]
+  },
+  {
+    "id": 9,
+    "title": "Dancing Milk Rainbow",
+    "category": "Physics",
+    "difficulty": "Easy",
+    "description": "Drop food coloring into whole milk, then touch one drop of dish soap to the surface — the colors explode and swirl for minutes. The soap breaks the milk's surface tension and races through its fat molecules, creating real fluid currents you can watch.",
+    "materials": ["Shallow plate", "Whole milk (full-fat works best)", "Food coloring (3-4 colors)", "Dish soap", "Cotton swab"],
+    "timeNeeded": "10 min",
+    "safetyLevel": "Safe",
+    "tags": ["physics", "surface-tension", "fluid-dynamics"]
+  },
+  {
+    "id": 10,
+    "title": "Homemade Magnetic Fluid",
+    "category": "Physics",
+    "difficulty": "Medium",
+    "description": "Build your own ferrofluid — a liquid that stands up in spiky towers when you bring a magnet near. Mix iron oxide powder into vegetable oil and watch it defy gravity, forming sharp peaks that follow the magnet.",
+    "materials": ["Iron oxide powder (rust pigment)", "Vegetable oil", "Small clear jar with lid", "Strong neodymium magnet"],
+    "timeNeeded": "20 min",
+    "safetyLevel": "Supervision required — don't eat or drink it, wash hands after",
+    "tags": ["physics", "magnetism", "ferrofluid"]
   }
 ]

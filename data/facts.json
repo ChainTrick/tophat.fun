@@ -78,5 +78,45 @@
     "category": "Physics",
     "source": "Optics & Photonics News",
     "tags": ["physics", "light", "optics"]
+  },
+  {
+    "id": 11,
+    "title": "Sloths Can Hold Their Breath Longer Than Dolphins",
+    "body": "A sloth can slow its heart rate to a third of normal and stay underwater for up to 40 minutes — longer than most dolphins. It evolved this trick because rivers are the main highway between trees, and crocodiles love a swim.",
+    "category": "Biology",
+    "source": "Journal of Comparative Physiology B",
+    "tags": ["animals", "ocean", "biology"]
+  },
+  {
+    "id": 12,
+    "title": "Wombats Poop in Cubes",
+    "body": "The wombat is the only animal known to produce cube-shaped droppings. It happens because the last section of its gut has uneven wall thickness that molds the waste into blocks — perfect for stacking on rocks so rival wombats can't tell how fresh they are.",
+    "category": "Biology",
+    "source": "University of Queensland Zoology",
+    "tags": ["animals", "biology", "australia"]
+  },
+  {
+    "id": 13,
+    "title": "There Are More Possible Chess Games Than Atoms in the Universe",
+    "body": "Claude Shannon estimated the number of possible chess games at around 10^120 — the 'Shannon number'. The observable universe contains roughly 10^80 atoms. Every game ever played is a single grain in an incomprehensibly vast desert.",
+    "category": "Mathematics",
+    "source": "Claude Shannon, Bell Labs (1950)",
+    "tags": ["math", "games", "infinity"]
+  },
+  {
+    "id": 14,
+    "title": "Honeybees Can Recognize Human Faces",
+    "body": "A University of Melbourne study trained bees to distinguish individual human faces using only their tiny compound eyes — and they remembered them days later. Their brain is the size of a sesame seed, yet it can do what most computer vision systems struggle with.",
+    "category": "Biology",
+    "source": "University of Melbourne (Current Biology, 2019)",
+    "tags": ["animals", "brain", "biology"]
+  },
+  {
+    "id": 15,
+    "title": "The First Computer Bug Was a Real Moth",
+    "body": "On October 9, 1947, Grace Hopper's team found an actual moth trapped in a relay of the Harvard Mark II computer. They taped it into the logbook with the note 'First actual case of bug being found' — and the term stuck for 80 years.",
+    "category": "History",
+    "source": "Harvard University, Grace Hopper logbook",
+    "tags": ["history", "computers", "science"]
   }
 ]

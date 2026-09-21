@@ -54,5 +54,40 @@
     "answer": "Fire",
     "difficulty": "Medium",
     "category": "Riddle"
+  },
+  {
+    "id": 9,
+    "question": "The more you take away from me, the bigger I get. What am I?",
+    "answer": "A hole",
+    "difficulty": "Easy",
+    "category": "Riddle"
+  },
+  {
+    "id": 10,
+    "question": "Two men walk into a hotel. One says to the other: 'I'm bankrupt.' The second man checks his watch and says nothing. What game are they playing?",
+    "answer": "Monopoly — one player pushed his token onto a hotel he didn't own and lost all his money.",
+    "difficulty": "Medium",
+    "category": "Lateral Thinking"
+  },
+  {
+    "id": 11,
+    "question": "You have 8 identical-looking balls. One weighs slightly more than the other seven. Using a balance scale (no weights), find the heavy ball in exactly two weighings.",
+    "answer": "Split the balls into groups of 3, 3, and 2. Weigh group A against group B: if they balance, the heavy ball is in the leftover pair — weigh those two to find it. If one side tips, take that heavier group of three and weigh any two of them; whichever side tips (or the unweighed ball, if they balance) is the heavy one.",
+    "difficulty": "Hard",
+    "category": "Logic"
+  },
+  {
+    "id": 12,
+    "question": "What word in the English language is always spelled correctly?",
+    "answer": "'Incorrectly' — it's impossible to spell it wrong.",
+    "difficulty": "Medium",
+    "category": "Word Puzzle"
+  },
+  {
+    "id": 13,
+    "question": "A plane crashes exactly on the border between two countries. Where are the survivors buried?",
+    "answer": "Nowhere — survivors don't get buried.",
+    "difficulty": "Easy",
+    "category": "Trick Question"
   }
 ]
