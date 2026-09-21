@@ -63,6 +63,9 @@ def nav_html(active_key):
     for key, label in NAV_LABELS:
         cls = ' class="active"' if key == active_key else ""
         items.append(f'<li><a href="{PAGES[key]}" data-section="{key}"{cls}>{label}</a></li>')
+    # Guestbook is a standalone page (not a generated section) — append it last.
+    gb_cls = ' class="active"' if active_key == "guestbook" else ""
+    items.append(f'<li><a href="guestbook.html"{gb_cls}>Guestbook</a></li>')
     return f"""  <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
